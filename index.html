@@ -53,7 +53,7 @@
             --text-main: #f8fafc;
             --text-sub: #cbd5e1;
             --text-muted: #94a3b8;
-            --icon-color: #94a3b8; /* Lighter Slate for Dark Mode */
+            --icon-color: #94a3b8; 
             
             --glass-bg: rgba(15, 23, 42, 0.85);
             --glass-border: rgba(255, 255, 255, 0.1);
@@ -106,7 +106,7 @@
 
         .hero-left { position: relative; display: flex; justify-content: center;}
         
-        /* FIX: Robust Photo Frame without nested div gaps */
+        /* Updated Photo Styling: No Frame, Just Shadow & Radius */
         .hero-img {
             width: 200px; 
             height: 220px;
@@ -114,11 +114,11 @@
             object-fit: cover;
             object-position: top center; 
             
-            /* Creating the frame using border and outline */
-            border: 6px solid var(--glass-bg); /* White Frame */
-            outline: 1px solid var(--glass-border); /* Outer Edge */
+            /* Removed Border and Outline entirely */
+            border: none;
+            outline: none;
             
-            /* Soft Shadow */
+            /* Only Shadow for lift */
             box-shadow: 0 20px 40px -10px var(--primary-glow);
             background: var(--bg-body);
         }
@@ -160,7 +160,7 @@
         .section-header {
             display: flex; align-items: flex-end; gap: 20px; margin-bottom: 24px;
             opacity: 0; animation: slideUp 0.8s ease-out forwards 0.2s;
-            cursor: default; /* Indicates it's interactive */
+            cursor: default;
         }
         
         .section-title { 
@@ -179,14 +179,12 @@
             overflow: hidden;
         }
 
-        /* Hover on Header triggers both Title and Line */
         .section-header:hover .section-title {
             color: var(--primary);
         }
         
         .section-header:hover .section-line { 
             height: 3px;
-            /* Shimmer Effect Gradient */
             background: linear-gradient(90deg, var(--primary) 0%, #a855f7 40%, var(--primary) 100%);
             background-size: 200% auto;
             animation: shimmer 2s linear infinite;
@@ -199,8 +197,8 @@
         /* --- Cards Global --- */
         .card-stack { display: flex; flex-direction: column; gap: 16px; }
         
-        /* Unified Card Style for All Sections */
-        .card {
+        /* Unified Card Style & Hover for All Sections */
+        .card, .mini-card {
             background: var(--glass-bg); backdrop-filter: blur(10px);
             border: 1px solid var(--glass-border); border-radius: var(--radius-lg);
             padding: 20px 26px;
@@ -208,13 +206,24 @@
             transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
             opacity: 0; animation: slideUp 0.8s ease-out forwards 0.3s;
         }
-        
-        /* Hover Effect for Card Stack */
-        .card:hover {
+
+        /* Hover Effect for ALL Cards */
+        .card:hover, .mini-card:hover {
             border-color: var(--primary); 
-            transform: translateY(-4px); /* Lift up effect */
+            transform: translateY(-4px); 
             box-shadow: var(--hover-shadow);
         }
+
+        /* --- Custom Icon Class for Downloaded Images --- */
+        .custom-icon {
+            width: 1.2em;
+            height: 1.2em;
+            vertical-align: middle;
+            object-fit: contain;
+            /* If you want them to be grayscale until hover, uncomment below */
+            /* filter: grayscale(100%); transition: 0.3s; */
+        }
+        /* .mini-card:hover .custom-icon { filter: grayscale(0%); } */
 
         /* --- Publications --- */
         .pub-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
@@ -290,15 +299,11 @@
             display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px;
             opacity: 0; animation: slideUp 0.8s ease-out forwards 0.5s;
         }
+        
+        /* .mini-card now inherits basic styles from .card above */
         .mini-card {
-            background: var(--glass-bg); backdrop-filter: blur(10px);
-            border: 1px solid var(--glass-border);
-            border-radius: var(--radius-lg); padding: 22px 24px;
             height: 100%; display: flex; flex-direction: column;
-            box-shadow: var(--card-shadow);
-            transition: all 0.3s;
         }
-        .mini-card:hover { border-color: var(--primary); transform: translateY(-4px); box-shadow: var(--hover-shadow); }
 
         .mini-head { display: flex; justify-content: space-between; align-items: start; margin-bottom: 8px; gap: 10px; }
         
