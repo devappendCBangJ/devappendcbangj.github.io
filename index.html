@@ -13,255 +13,280 @@
 
     <style>
         :root {
-            /* Light Theme */
-            --bg-body: #f8f9fa;
+            /* Color Palette */
+            --bg-body: #ffffff; /* Pure white start */
+            --bg-sub: #f8fafc;  /* Very light blue-grey */
             --bg-card: #ffffff;
-            --text-main: #111111;
-            --text-sub: #555555;
-            --accent: #2563eb; /* Royal Blue */
+            
+            --text-main: #0f172a; /* Dark Slate (Not pure black) */
+            --text-sub: #475569;  /* Slate Grey */
+            
+            --accent-primary: #2563eb; /* Vibrant Blue */
+            --accent-secondary: #4f46e5; /* Indigo */
+            --accent-gradient: linear-gradient(135deg, #2563eb 0%, #4f46e5 100%);
+            
             --border: #e2e8f0;
-            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-            --shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-            --tag-bg: #eff6ff;
-            --tag-text: #2563eb;
-            --skill-bg: #f1f5f9;
-            --skill-text: #475569;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.08), 0 4px 6px -2px rgba(0,0,0,0.04);
+            
+            --badge-bg: #eff6ff;
+            --badge-text: #2563eb;
         }
 
         [data-theme="dark"] {
-            /* Dark Theme */
             --bg-body: #0f172a;
+            --bg-sub: #1e293b;
             --bg-card: #1e293b;
+            
             --text-main: #f8fafc;
             --text-sub: #94a3b8;
-            --accent: #60a5fa;
+            
+            --accent-primary: #60a5fa;
+            --accent-secondary: #818cf8;
+            --accent-gradient: linear-gradient(135deg, #60a5fa 0%, #818cf8 100%);
+            
             --border: #334155;
-            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
-            --shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
-            --tag-bg: #1e3a8a;
-            --tag-text: #93c5fd;
-            --skill-bg: #334155;
-            --skill-text: #cbd5e1;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.3);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.4);
+            
+            --badge-bg: #1e3a8a;
+            --badge-text: #bfdbfe;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; }
+        * { margin: 0; padding: 0; box-sizing: border-box; transition: all 0.2s ease-in-out; }
         
         body {
             font-family: 'Inter', sans-serif;
-            background-color: var(--bg-body);
+            background-color: var(--bg-sub);
             color: var(--text-main);
             line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
         }
 
         .container {
-            max-width: 850px;
+            max-width: 900px;
             margin: 0 auto;
-            padding: 40px 20px 80px;
+            padding: 40px 24px 80px;
         }
 
-        /* --- Dark Mode Toggle --- */
+        /* --- Theme Toggle --- */
         .nav-bar { display: flex; justify-content: flex-end; margin-bottom: 20px; }
-        .theme-toggle {
-            background: transparent;
+        .theme-btn {
+            background: var(--bg-card);
             border: 1px solid var(--border);
-            color: var(--text-sub);
-            padding: 8px 16px;
-            border-radius: 20px;
+            color: var(--text-main);
+            padding: 10px 18px;
+            border-radius: 99px;
             cursor: pointer;
-            font-size: 0.9rem;
+            font-weight: 600;
             display: flex;
             align-items: center;
             gap: 8px;
+            box-shadow: var(--shadow-sm);
         }
-        .theme-toggle:hover { background-color: var(--bg-card); color: var(--accent); border-color: var(--accent); }
+        .theme-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); color: var(--accent-primary); }
 
-        /* --- Hero Section (Profile) --- */
+        /* --- Hero Section --- */
         .hero {
+            background: var(--bg-card);
+            border-radius: 24px;
+            padding: 40px;
             display: flex;
-            align-items: flex-start;
+            align-items: center;
             gap: 50px;
-            margin-bottom: 70px;
-            animation: fadeIn 0.8s ease-out;
+            margin-bottom: 60px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border);
         }
 
         .hero-img {
             width: 200px;
             height: 200px;
-            border-radius: 20px;
+            border-radius: 24px;
             object-fit: cover;
-            box-shadow: var(--shadow);
-            border: 1px solid var(--border);
+            border: 4px solid var(--bg-body);
+            box-shadow: var(--shadow-lg);
             flex-shrink: 0;
         }
 
-        .hero-content { flex: 1; }
-
         .hero-name {
-            font-size: 2.8rem;
+            font-size: 3rem;
             font-weight: 800;
-            letter-spacing: -0.02em;
-            margin-bottom: 10px;
-            color: var(--text-main);
+            letter-spacing: -0.03em;
+            margin-bottom: 12px;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
         }
 
-        .hero-role {
-            font-size: 1.15rem;
+        .hero-roles {
+            font-size: 1.1rem;
             color: var(--text-sub);
-            margin-bottom: 20px;
+            margin-bottom: 24px;
             font-weight: 500;
         }
+        .role-highlight { color: var(--accent-primary); font-weight: 700; }
 
-        .hero-desc {
-            font-size: 1.05rem;
-            color: var(--text-sub);
-            margin-bottom: 25px;
-            max-width: 600px;
+        .interest-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 28px;
+        }
+        
+        /* Interactive Badges */
+        .badge-pill {
+            background-color: var(--badge-bg);
+            color: var(--badge-text);
+            padding: 6px 14px;
+            border-radius: 99px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: default;
+            border: 1px solid transparent;
+        }
+        .badge-pill:hover {
+            transform: scale(1.05);
+            border-color: var(--badge-text);
+            background-color: var(--bg-card);
         }
 
-        .hero-desc strong { color: var(--text-main); font-weight: 600; }
-
-        .social-links { display: flex; gap: 12px; flex-wrap: wrap; }
-        .social-btn {
+        .social-row { display: flex; gap: 12px; }
+        .social-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            background: var(--bg-sub);
+            color: var(--text-sub);
             display: flex;
             align-items: center;
-            gap: 8px;
+            justify-content: center;
             text-decoration: none;
-            color: var(--text-sub);
-            font-size: 0.95rem;
-            font-weight: 500;
-            padding: 8px 16px;
-            border-radius: 8px;
+            font-size: 1.2rem;
             border: 1px solid var(--border);
-            background-color: var(--bg-card);
-            transition: all 0.2s ease;
         }
-        .social-btn:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow);
+        .social-icon:hover {
+            background: var(--accent-primary);
+            color: white;
+            border-color: var(--accent-primary);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
         }
 
-        /* --- Section Titles --- */
+        /* --- Section Styling --- */
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+        }
         .section-title {
             font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 25px;
-            display: flex;
-            align-items: center;
+            font-weight: 800;
             color: var(--text-main);
+            position: relative;
         }
-        .section-title::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background-color: var(--border);
+        .section-line {
+            flex-grow: 1;
+            height: 2px;
+            background: var(--border);
             margin-left: 20px;
+            border-radius: 2px;
         }
 
-        /* --- Cards Global Style --- */
-        .card-grid { display: grid; gap: 20px; }
-        
+        /* --- Card Grid --- */
+        .card-grid { display: grid; gap: 24px; }
+
         .card {
-            background-color: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 12px;
+            background: var(--bg-card);
+            border-radius: 16px;
             padding: 24px;
-            transition: all 0.2s ease;
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
         }
         .card:hover {
-            border-color: var(--accent);
-            box-shadow: var(--shadow-hover);
-            transform: translateY(-3px);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--accent-secondary);
         }
+        
+        /* Decorative Accent on Card Hover */
+        .card::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 0; bottom: 0;
+            width: 4px;
+            background: var(--accent-gradient);
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+        .card:hover::before { opacity: 1; }
 
-        /* --- Publications --- */
-        .pub-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 15px; margin-bottom: 8px; }
-        .pub-title { font-size: 1.1rem; font-weight: 600; color: var(--text-main); line-height: 1.4; }
-        .pub-authors { font-size: 0.95rem; color: var(--text-sub); margin-bottom: 12px; }
-        .tag {
-            display: inline-block;
+        /* Publication Specifics */
+        .pub-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
             padding: 4px 10px;
             border-radius: 6px;
             font-size: 0.75rem;
-            font-weight: 600;
-            font-family: 'JetBrains Mono', monospace;
-            background-color: var(--tag-bg);
-            color: var(--tag-text);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            background: var(--bg-sub);
+            color: var(--text-sub);
+            margin-bottom: 8px;
         }
-        .tag.highlight { background-color: #fef2f2; color: #ef4444; } /* Red for 'Under Review' */
+        .pub-status.highlight { background: #fee2e2; color: #ef4444; } /* Red for Under Review */
+        .pub-status.conf { background: #dbeafe; color: #2563eb; } /* Blue for Accepted */
 
-        /* --- Experience & Education Cards (Improved Layout) --- */
-        .exp-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        .exp-org { font-size: 1.1rem; font-weight: 700; color: var(--text-main); }
-        .exp-date { font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--text-sub); }
+        .pub-title { font-size: 1.15rem; font-weight: 700; line-height: 1.4; margin-bottom: 8px; }
+        .pub-authors { color: var(--text-sub); font-size: 0.95rem; }
+        .pub-authors strong { color: var(--text-main); font-weight: 600; border-bottom: 2px solid var(--accent-primary); }
+
+        /* Experience Layout */
+        .exp-flex { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px; }
+        .exp-org { font-size: 1.1rem; font-weight: 700; }
+        .exp-date { font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--text-sub); background: var(--bg-sub); padding: 2px 8px; border-radius: 4px; }
+        .exp-role { color: var(--accent-primary); font-weight: 600; margin-bottom: 12px; font-size: 1rem; }
         
-        .exp-role-badge {
-            display: inline-block;
-            background-color: var(--skill-bg);
-            color: var(--text-main);
-            font-size: 0.85rem;
-            font-weight: 600;
-            padding: 4px 10px;
-            border-radius: 6px;
-            margin-bottom: 12px;
-        }
-
-        .detail-row {
+        .info-list { list-style: none; padding: 0; }
+        .info-list li {
             display: flex;
-            align-items: flex-start;
             gap: 10px;
             margin-bottom: 6px;
             font-size: 0.95rem;
             color: var(--text-sub);
         }
-        .detail-icon {
-            width: 20px;
-            text-align: center;
-            color: var(--accent);
-            margin-top: 3px; /* Align with text */
-        }
-        
-        .tech-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 5px; }
-        .tech-tag {
-            font-size: 0.8rem;
-            background-color: var(--skill-bg);
-            color: var(--skill-text);
-            padding: 2px 8px;
-            border-radius: 4px;
-        }
+        .info-icon { color: var(--accent-primary); width: 20px; text-align: center; }
 
-        /* --- Awards List --- */
-        .award-item {
+        /* Awards Row */
+        .award-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 12px 0;
             border-bottom: 1px solid var(--border);
         }
-        .award-item:last-child { border-bottom: none; }
-        .award-name { font-weight: 600; font-size: 1rem; }
-        .award-sub { font-size: 0.85rem; color: var(--text-sub); }
+        .award-row:last-child { border-bottom: none; }
+        .award-title { font-weight: 600; color: var(--text-main); }
+        .award-meta { font-size: 0.85rem; color: var(--text-sub); margin-top: 2px; }
+        .award-year { 
+            font-family: 'JetBrains Mono', monospace; 
+            font-weight: 700; 
+            color: var(--text-sub);
+        }
 
-        /* Animations */
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* Mobile Responsive */
+        /* Mobile */
         @media (max-width: 768px) {
-            .hero { flex-direction: column; text-align: center; align-items: center; gap: 30px; }
+            .hero { flex-direction: column; text-align: center; padding: 30px 20px; gap: 20px; }
             .hero-img { width: 160px; height: 160px; }
-            .hero-desc { margin: 0 auto 25px auto; }
-            .social-links { justify-content: center; }
-            .exp-header { flex-direction: column; align-items: flex-start; gap: 5px; }
-            .pub-header { flex-direction: column; gap: 5px; }
+            .interest-badges { justify-content: center; }
+            .social-row { justify-content: center; }
+            .exp-flex { flex-direction: column; gap: 4px; }
+            .nav-bar { justify-content: center; }
         }
     </style>
 </head>
@@ -270,235 +295,209 @@
     <div class="container">
         
         <nav class="nav-bar">
-            <button class="theme-toggle" onclick="toggleTheme()">
-                <i class="fas fa-moon"></i> <span>Theme</span>
+            <button class="theme-btn" onclick="toggleTheme()">
+                <i class="fas fa-moon"></i> <span>Dark Mode</span>
             </button>
         </nav>
 
-        <section class="hero">
+        <header class="hero">
             <img src="profile.jpg" alt="Jaehun Bang" class="hero-img">
             
-            <div class="hero-content">
+            <div>
                 <h1 class="hero-name">Jaehun Bang</h1>
-                <div class="hero-role">
-                    M.S. Student at <span style="color:var(--accent)">UNIST</span> / 
-                    Visiting Researcher at <span style="color:var(--accent)">CMU</span>
+                <div class="hero-roles">
+                    M.S. Student at <span class="role-highlight">UNIST</span><br>
+                    Visiting Researcher at <span class="role-highlight">CMU</span>
                 </div>
                 
-                <p class="hero-desc">
-                    I am an AI researcher passionate about <strong>3D-LLM</strong>, <strong>Vision-Language Models (VLM)</strong>, and <strong>3D Gaussian Splatting</strong>. 
-                    <br>I aim to build systems that can understand and interact with open-vocabulary 3D scenes.
-                </p>
+                <div class="interest-badges">
+                    <span class="badge-pill">3D-LLM</span>
+                    <span class="badge-pill">Vision-Language Models (VLM)</span>
+                    <span class="badge-pill">Vision-Language-Action (VLA)</span>
+                    <span class="badge-pill">3D Gaussian Splatting</span>
+                </div>
 
-                <div class="social-links">
-                    <a href="mailto:dev.appendCBangJ@gmail.com" class="social-btn">
-                        <i class="fas fa-envelope"></i> Email
-                    </a>
-                    <a href="https://github.com/devappendCBangJ" target="_blank" class="social-btn">
-                        <i class="fab fa-github"></i> GitHub
-                    </a>
-                    <a href="https://www.linkedin.com/in/jaehun-bang-70b6172b8/" target="_blank" class="social-btn">
-                        <i class="fab fa-linkedin"></i> LinkedIn
-                    </a>
-                    <a href="#" class="social-btn">
-                        <i class="fas fa-graduation-cap"></i> Scholar
-                    </a>
+                <div class="social-row">
+                    <a href="mailto:dev.appendCBangJ@gmail.com" class="social-icon" title="Email"><i class="fas fa-envelope"></i></a>
+                    <a href="https://github.com/devappendCBangJ" class="social-icon" title="GitHub" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/jaehun-bang-70b6172b8/" class="social-icon" title="LinkedIn" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="social-icon" title="Google Scholar"><i class="fas fa-graduation-cap"></i></a>
                 </div>
             </div>
-        </section>
+        </header>
 
         <section>
-            <h2 class="section-title">Selected Publications</h2>
+            <div class="section-header">
+                <h2 class="section-title">Selected Publications</h2>
+                <div class="section-line"></div>
+            </div>
+            
             <div class="card-grid">
-                
                 <div class="card">
-                    <div class="pub-header">
-                        <div class="pub-title">LightSplat: Fast and Memory-Efficient Open-Vocabulary 3D Scene Understanding in Five Seconds</div>
-                        <span class="tag highlight">Under Review (CVPR '26)</span>
-                    </div>
+                    <div class="pub-status highlight"><i class="fas fa-circle-notch fa-spin"></i> Under Review</div>
+                    <div class="pub-title">LightSplat: Fast and Memory-Efficient Open-Vocabulary 3D Scene Understanding in Five Seconds</div>
                     <div class="pub-authors">
                         <strong>Jaehun Bang</strong>, Jinhyeok Kim, Minji Kim, Seungheon Jeong, Kyungdon Joo
                     </div>
+                    <div style="margin-top: 10px; font-size: 0.85rem; color: var(--accent-primary); font-weight:600;">CVPR 2026</div>
                 </div>
 
                 <div class="card">
-                    <div class="pub-header">
-                        <div class="pub-title">Beyond the Highlights: Video Retrieval with Salient and Surrounding Contexts</div>
-                        <span class="tag">WACV 2026</span>
-                    </div>
+                    <div class="pub-status conf"><i class="fas fa-check-circle"></i> Accepted</div>
+                    <div class="pub-title">Beyond the Highlights: Video Retrieval with Salient and Surrounding Contexts</div>
                     <div class="pub-authors">
                         <strong>Jaehun Bang</strong>, Moon Ye-Bin, Tae-Hyun Oh, Kyungdon Joo
                     </div>
+                    <div style="margin-top: 10px; font-size: 0.85rem; color: var(--accent-primary); font-weight:600;">WACV 2026</div>
                 </div>
 
                 <div class="card">
-                    <div class="pub-header">
-                        <div class="pub-title">Rigidity-Aware 3D Gaussian Deformation from a Single Image</div>
-                        <span class="tag">SIGGRAPH ASIA 2025</span>
-                    </div>
+                    <div class="pub-status conf"><i class="fas fa-check-circle"></i> Accepted</div>
+                    <div class="pub-title">Rigidity-Aware 3D Gaussian Deformation from a Single Image</div>
                     <div class="pub-authors">
                         Jinhyeok Kim, <strong>Jaehun Bang</strong>, Seunghyun Seo, Kyungdon Joo
                     </div>
+                    <div style="margin-top: 10px; font-size: 0.85rem; color: var(--accent-primary); font-weight:600;">SIGGRAPH ASIA 2025</div>
                 </div>
-
             </div>
         </section>
 
-        <section>
-            <h2 class="section-title">Experience</h2>
+        <section style="margin-top: 60px;">
+            <div class="section-header">
+                <h2 class="section-title">Experience</h2>
+                <div class="section-line"></div>
+            </div>
+
             <div class="card-grid">
-                
                 <div class="card">
-                    <div class="exp-header">
+                    <div class="exp-flex">
                         <div class="exp-org">Carnegie Mellon University (CMU)</div>
                         <div class="exp-date">Aug. 2025 - Present</div>
                     </div>
-                    <div class="exp-role-badge">Visiting Researcher</div>
-                    
-                    <div class="detail-row">
-                        <div class="detail-icon"><i class="fas fa-user-tie"></i></div>
-                        <div>Advisor: <strong>Prof. Deva Ramanan</strong></div>
-                    </div>
-                    <div class="detail-row">
-                        <div class="detail-icon"><i class="fas fa-microscope"></i></div>
-                        <div>
-                            Research Topic:
-                            <div class="tech-tags">
-                                <span class="tech-tag">3D-LLM</span>
-                                <span class="tech-tag">Open-Vocabulary 3D Scene Understanding</span>
-                            </div>
-                        </div>
-                    </div>
+                    <div class="exp-role">Visiting Researcher</div>
+                    <ul class="info-list">
+                        <li><span class="info-icon"><i class="fas fa-user-tie"></i></span> Advisor: Prof. Deva Ramanan</li>
+                        <li><span class="info-icon"><i class="fas fa-microscope"></i></span> Topic: 3D-LLM, Open-Vocabulary 3D Scene Understanding</li>
+                    </ul>
                 </div>
 
                 <div class="card">
-                    <div class="exp-header">
+                    <div class="exp-flex">
                         <div class="exp-org">POSTECH</div>
                         <div class="exp-date">Jan. 2024 - Aug. 2024</div>
                     </div>
-                    <div class="exp-role-badge">Research Intern</div>
-                    
-                    <div class="detail-row">
-                        <div class="detail-icon"><i class="fas fa-user-tie"></i></div>
-                        <div>Advisor: <strong>Prof. Tae-Hyun Oh</strong></div>
-                    </div>
-                    <div class="detail-row">
-                        <div class="detail-icon"><i class="fas fa-microscope"></i></div>
-                        <div>
-                            Research Topic:
-                            <div class="tech-tags">
-                                <span class="tech-tag">Video-LLM</span>
-                                <span class="tech-tag">Vision-Language Model</span>
-                            </div>
-                        </div>
-                    </div>
+                    <div class="exp-role">Research Intern</div>
+                    <ul class="info-list">
+                        <li><span class="info-icon"><i class="fas fa-user-tie"></i></span> Advisor: Prof. Tae-Hyun Oh</li>
+                        <li><span class="info-icon"><i class="fas fa-microscope"></i></span> Topic: Video-LLM, Vision-Language Model</li>
+                    </ul>
                 </div>
-
             </div>
         </section>
 
-        <section>
-            <h2 class="section-title">Education</h2>
+        <section style="margin-top: 60px;">
+            <div class="section-header">
+                <h2 class="section-title">Education</h2>
+                <div class="section-line"></div>
+            </div>
+
             <div class="card-grid">
-                
                 <div class="card">
-                    <div class="exp-header">
+                    <div class="exp-flex">
                         <div class="exp-org">UNIST</div>
                         <div class="exp-date">Sep. 2024 - Present</div>
                     </div>
-                    <div class="detail-row">
-                        <div class="detail-icon"><i class="fas fa-graduation-cap"></i></div>
-                        <div>M.S. in Artificial Intelligence (Advisor: Prof. Kyungdon Joo)</div>
-                    </div>
-                    <div class="detail-row">
-                        <div class="detail-icon"><i class="fas fa-chart-bar"></i></div>
-                        <div>GPA: 4.3 / 4.3</div>
-                    </div>
+                    <div class="exp-role">M.S. in Artificial Intelligence</div>
+                    <ul class="info-list">
+                        <li><span class="info-icon"><i class="fas fa-chalkboard-teacher"></i></span> Advisor: Prof. Kyungdon Joo</li>
+                    </ul>
                 </div>
 
                 <div class="card">
-                    <div class="exp-header">
+                    <div class="exp-flex">
                         <div class="exp-org">SEOULTECH</div>
                         <div class="exp-date">Mar. 2018 - Aug. 2024</div>
                     </div>
-                    <div class="detail-row">
-                        <div class="detail-icon"><i class="fas fa-graduation-cap"></i></div>
-                        <div>B.S. in Mechanical System Design Engineering</div>
-                    </div>
-                    <div class="detail-row">
-                        <div class="detail-icon"><i class="fas fa-info-circle"></i></div>
-                        <div>Minor in Applied Artificial Intelligence</div>
-                    </div>
-                    <div class="detail-row">
-                        <div class="detail-icon"><i class="fas fa-chart-bar"></i></div>
-                        <div>GPA: 4.4 / 4.5 (Rank: 1/40)</div>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-        <section>
-            <h2 class="section-title">Honors & Awards</h2>
-            <div class="card">
-                
-                <div class="award-item">
-                    <div>
-                        [cite_start]<div class="award-name">Prime Minister's Award [cite: 42]</div>
-                        <div class="award-sub">Intl. Robot Contest Intelligent Robot Div.</div>
-                    </div>
-                    <div class="tag">2022</div>
-                </div>
-
-                <div class="award-item">
-                    <div>
-                        [cite_start]<div class="award-name">2nd Place (School-wide) [cite: 25]</div>
-                        <div class="award-sub">LINC 3.0 Competition</div>
-                    </div>
-                    <div class="tag">2024</div>
-                </div>
-
-                <div class="award-item">
-                    <div>
-                        [cite_start]<div class="award-name">1st Place [cite: 40]</div>
-                        <div class="award-sub">International Robot Contest Intelligent Robot Div.</div>
-                    </div>
-                    <div class="tag">2022</div>
-                </div>
-
-                <div class="award-item">
-                    <div>
-                        [cite_start]<div class="award-name">Full-Ride Scholarship [cite: 66, 68]</div>
-                        <div class="award-sub">Silla Culture & Academic Excellence</div>
-                    </div>
-                    <div class="tag">Multiple</div>
-                </div>
-
-            </div>
-        </section>
-
-        <section>
-            <h2 class="section-title">Projects</h2>
-            <div class="card">
-                 <div class="award-item">
-                    <div>
-                        [cite_start]<div class="award-name">HYUNDAI CTO AI Competition [cite: 49]</div>
-                        <div class="award-sub">Placed in Top 30</div>
-                    </div>
-                    <div class="tag">2023</div>
-                </div>
-
-                <div class="award-item">
-                    <div>
-                        [cite_start]<div class="award-name">Google Solution Challenge [cite: 51]</div>
-                        <div class="award-sub">Top 5% (out of approx. 2000 teams)</div>
-                    </div>
-                    <div class="tag">2023</div>
+                    <div class="exp-role">B.S. in Mechanical System Design Engineering</div>
+                    <ul class="info-list">
+                        <li><span class="info-icon"><i class="fas fa-star"></i></span> GPA: 4.4 / 4.5 (Rank: 1/40)</li>
+                        <li><span class="info-icon"><i class="fas fa-plus"></i></span> Minor: Applied Artificial Intelligence</li>
+                    </ul>
                 </div>
             </div>
         </section>
 
-        <footer style="text-align: center; margin-top: 60px; color: var(--text-sub); font-size: 0.85rem;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 60px;">
+            
+            <section>
+                <div class="section-header">
+                    <h2 class="section-title">Honors & Awards</h2>
+                    <div class="section-line"></div>
+                </div>
+                <div class="card" style="padding: 10px 24px;">
+                    <div class="award-row">
+                        <div>
+                            <div class="award-title">Prime Minister's Award</div>
+                            <div class="award-meta">Intl. Robot Contest</div>
+                        </div>
+                        <div class="award-year">2022</div>
+                    </div>
+                    <div class="award-row">
+                        <div>
+                            <div class="award-title">1st Place</div>
+                            <div class="award-meta">Intl. Robot Contest</div>
+                        </div>
+                        <div class="award-year">2022</div>
+                    </div>
+                    <div class="award-row">
+                        <div>
+                            <div class="award-title">2nd Place (School-wide)</div>
+                            <div class="award-meta">LINC 3.0 Competition</div>
+                        </div>
+                        <div class="award-year">2024</div>
+                    </div>
+                     <div class="award-row">
+                        <div>
+                            <div class="award-title">Full-Ride Scholarship</div>
+                            <div class="award-meta">Multiple Semesters</div>
+                        </div>
+                        <div class="award-year">-</div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <div class="section-header">
+                    <h2 class="section-title">Projects</h2>
+                    <div class="section-line"></div>
+                </div>
+                <div class="card" style="padding: 10px 24px;">
+                    <div class="award-row">
+                        <div>
+                            <div class="award-title">Hyundai CTO AI Comp.</div>
+                            <div class="award-meta">Top 30</div>
+                        </div>
+                        <div class="award-year">2023</div>
+                    </div>
+                    <div class="award-row">
+                        <div>
+                            <div class="award-title">Google Solution Chall.</div>
+                            <div class="award-meta">Top 5%</div>
+                        </div>
+                        <div class="award-year">2023</div>
+                    </div>
+                     <div class="award-row">
+                        <div>
+                            <div class="award-title">Coffee Delivery Robot</div>
+                            <div class="award-meta">1st Place (NISA)</div>
+                        </div>
+                        <div class="award-year">2023</div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <footer style="text-align: center; margin-top: 80px; color: var(--text-sub); font-size: 0.9rem;">
             &copy; 2025 Jaehun Bang.
         </footer>
     </div>
@@ -506,16 +505,19 @@
     <script>
         function toggleTheme() {
             const body = document.body;
-            const btnIcon = document.querySelector('.theme-toggle i');
+            const btnIcon = document.querySelector('.theme-btn i');
+            const btnText = document.querySelector('.theme-btn span');
             
             if (body.getAttribute('data-theme') === 'dark') {
                 body.removeAttribute('data-theme');
                 btnIcon.classList.remove('fa-sun');
                 btnIcon.classList.add('fa-moon');
+                btnText.innerText = "Dark Mode";
             } else {
                 body.setAttribute('data-theme', 'dark');
                 btnIcon.classList.remove('fa-moon');
                 btnIcon.classList.add('fa-sun');
+                btnText.innerText = "Light Mode";
             }
         }
     </script>
