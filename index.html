@@ -102,20 +102,18 @@
 
         .hero-left { position: relative; display: flex; justify-content: center;}
         
-        /* FIX: New Photo Frame Container */
         .hero-img-frame {
             width: 200px; 
             height: 220px;
             border-radius: 28px;
-            background: var(--glass-bg); /* White frame color */
-            padding: 6px; /* Thickness of the white frame */
-            /* Smooth shadow and subtle inner border for definition */
+            background: var(--glass-bg); 
+            padding: 6px; 
             box-shadow: 0 20px 40px -10px var(--primary-glow), inset 0 0 0 1px var(--glass-border);
         }
 
         .hero-img {
             width: 100%; height: 100%;
-            border-radius: 22px; /* Slightly smaller radius to fit inside frame */
+            border-radius: 22px; 
             object-fit: cover;
             object-position: top center; 
         }
@@ -161,17 +159,26 @@
         }
         .section-title { font-family: 'Outfit', sans-serif; font-size: 1.8rem; font-weight: 700; color: var(--text-main); line-height: 1; }
         
+        /* Updated Section Line with Shimmer Animation */
         .section-line { 
             flex-grow: 1; height: 2px; 
             background: linear-gradient(90deg, var(--glass-border) 0%, transparent 100%); 
             margin-bottom: 6px; 
             transform-origin: left;
-            transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+            transition: height 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
         
         .section-header:hover .section-line { 
-            background: linear-gradient(90deg, var(--primary) 0%, var(--primary-glow) 80%, transparent 100%);
             height: 3px;
+            background: linear-gradient(90deg, var(--primary) 0%, #a855f7 50%, var(--primary) 100%);
+            background-size: 200% auto;
+            animation: shimmer 3s linear infinite;
+        }
+
+        @keyframes shimmer {
+            to { background-position: 200% center; }
         }
 
         /* --- Cards Global --- */
@@ -206,7 +213,6 @@
         .status-dot-wrap { 
             display: flex; align-items: center; gap: 6px; 
             font-size: 0.8rem; font-weight: 700; text-transform: uppercase; 
-            /* FIX: Reduced kerning */
             letter-spacing: 0; 
         }
         .dot { width: 8px; height: 8px; border-radius: 50%; }
@@ -217,7 +223,6 @@
         .st-accept { color: var(--primary); }
         .dot-accept { background: var(--primary); }
 
-        /* FIX: Increased margin-bottom for spacing */
         .pub-title { font-size: 1.35rem; font-weight: 700; line-height: 1.3; margin-bottom: 12px; color: var(--text-main); letter-spacing: -0.01em; }
         .pub-authors { font-size: 1rem; color: var(--text-sub); }
         .me { color: var(--text-main); font-weight: 700; border-bottom: 2px solid var(--primary); }
@@ -247,7 +252,6 @@
             cursor: default;
         }
 
-        /* FIX: Added hover interaction for Professor Gray Pills */
         .pill-gray { background: var(--badge-gray-bg); color: var(--badge-gray-text); border-color: var(--badge-gray-border); }
         .pill-gray:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px rgba(37, 99, 235, 0.1); }
         
@@ -278,22 +282,12 @@
         .mini-card:hover { border-color: var(--primary); transform: translateY(-4px); box-shadow: var(--hover-shadow); }
 
         .mini-head { display: flex; justify-content: space-between; align-items: start; margin-bottom: 8px; gap: 10px; }
+        
         .mini-title { font-family: 'Outfit', sans-serif; font-size: 1.2rem; font-weight: 700; color: var(--text-main); line-height: 1.25; display: flex; align-items: center; gap: 8px; }
         
-        /* FIX: Title Icons styles & Brand Colors */
-        .mini-title i { font-size: 1.15rem; }
-        .fa-car { color: #002c5f; } /* Hyundai Blue */
-        .fa-google { color: #4285F4; } /* Google Blue */
-        .fa-hard-hat { color: #f59e0b; } /* Safety Orange */
-        .fa-robot.tech-gray { color: #64748b; } /* Tech Gray */
-        .fa-robot.robot-contest { color: #dc2626; } /* Contest Red */
-        .fa-cubes.capstone { color: #2563eb; } /* Design Blue */
-        .fa-laptop-code { color: #0ea5e9; } /* ICT Cyan */
-        .fa-users { color: #ec4899; } /* Club Pink */
-        .fa-microchip { color: #6366f1; } /* Embedded Purple */
-        .fa-university { color: #059669; } /* Scholarship Green */
-
-
+        /* Unified Title Icon Color */
+        .mini-title i { font-size: 1.15rem; color: var(--primary); }
+        
         .year-badge {
             font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; font-weight: 700;
             color: var(--text-muted); background: var(--badge-gray-bg); padding: 3px 8px; border-radius: 6px;
@@ -493,7 +487,7 @@
                     <div class="badge-list">
                         <span class="info-pill pill-emerald"><i class="fas fa-star"></i> GPA: 4.4 / 4.5 </span>
                         <span class="info-pill pill-emerald"><i class="fas fa-trophy"></i> Rank: 1/40</span>
-                        <span class="info-pill pill-navy"><i class="fas fa-code-branch"></i> Minor: Applied AI</span>
+                        <span class="info-pill pill-navy"><i class="fas fa-brain"></i> Minor: Applied AI</span>
                     </div>
                 </div>
 
@@ -509,7 +503,7 @@
                 
                 <div class="mini-card">
                     <div class="mini-head">
-                        <div class="mini-title"><i class="fas fa-robot robot-contest"></i> International Robot Contest</div>
+                        <div class="mini-title"><i class="fas fa-hammer"></i> International Robot Contest</div>
                         <span class="year-badge">2022</span>
                     </div>
                     <div class="mini-desc">Autonomous Combat Robot</div>
@@ -518,7 +512,7 @@
 
                 <div class="mini-card">
                     <div class="mini-head">
-                        <div class="mini-title"><i class="fas fa-cubes capstone"></i> LINC 3.0 Capstone Design</div>
+                        <div class="mini-title"><i class="fas fa-golf-ball-tee"></i> LINC 3.0 Capstone Design</div>
                         <span class="year-badge">2024</span>
                     </div>
                     <div class="mini-desc">Autonomous Golf Caddie Robot</div>
@@ -527,7 +521,7 @@
 
                 <div class="mini-card">
                     <div class="mini-head">
-                        <div class="mini-title"><i class="fas fa-cubes capstone"></i> Capstone Design Achievement</div>
+                        <div class="mini-title"><i class="fas fa-golf-ball-tee"></i> Capstone Design Achievement</div>
                         <span class="year-badge">2024</span>
                     </div>
                     <div class="mini-desc">Autonomous Golf Caddie Robot</div>
@@ -536,7 +530,7 @@
 
                 <div class="mini-card">
                     <div class="mini-head">
-                        <div class="mini-title"><i class="fas fa-laptop-code"></i> Hanium ICT Mentoring</div>
+                        <div class="mini-title"><i class="fas fa-golf-ball-tee"></i> Hanium ICT Mentoring</div>
                         <span class="year-badge">2024</span>
                     </div>
                     <div class="mini-desc">Autonomous Golf Caddie Robot</div>
@@ -554,7 +548,7 @@
 
                 <div class="mini-card">
                     <div class="mini-head">
-                        <div class="mini-title"><i class="fas fa-microchip"></i> Embedded Software Contest</div>
+                        <div class="mini-title"><i class="fas fa-person-walking"></i> Embedded Software Contest</div>
                         <span class="year-badge">2021</span>
                     </div>
                     <div class="mini-desc">Humanoid Robot</div>
@@ -563,7 +557,7 @@
 
                 <div class="mini-card">
                     <div class="mini-head">
-                        <div class="mini-title"><i class="fas fa-university"></i> Silla Culture Scholarship</div>
+                        <div class="mini-title"><i class="fas fa-landmark"></i> Silla Culture Scholarship</div>
                         <span class="year-badge">2021 - 2023</span>
                     </div>
                     <div class="mini-desc">Silla Culture Scholarship Foundation</div>
@@ -572,7 +566,7 @@
 
                 <div class="mini-card">
                     <div class="mini-head">
-                        <div class="mini-title"><i class="fas fa-university"></i> Academic Excellence Scholarship</div>
+                        <div class="mini-title"><i class="fas fa-ranking-star"></i> Academic Excellence Scholarship</div>
                         <span class="year-badge">2018 - 2022</span>
                     </div>
                     <div class="mini-desc">Seoultech</div>
@@ -609,7 +603,7 @@
 
                  <div class="mini-card">
                     <div class="mini-head">
-                        <div class="mini-title"><i class="fas fa-hard-hat"></i> Manufacturing Safety AI Hackathon</div>
+                        <div class="mini-title"><i class="fas fa-person-rays"></i> Manufacturing Safety AI Hackathon</div>
                         <span class="year-badge">2022</span>
                     </div>
                     <div class="mini-desc">AI for Musculoskeletal Safety</div>
@@ -618,7 +612,7 @@
 
                 <div class="mini-card">
                     <div class="mini-head">
-                        <div class="mini-title"><i class="fas fa-robot tech-gray"></i> Self-Driving Coffee Delivery Robot</div>
+                        <div class="mini-title"><i class="fas fa-truck-fast"></i> Self-Driving Coffee Delivery Robot</div>
                         <span class="year-badge">2023</span>
                     </div>
                     <div class="mini-desc">Autonomous Mobile Robot</div>
