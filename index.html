@@ -28,12 +28,19 @@
             --primary: #2563eb;
             --primary-glow: rgba(37, 99, 235, 0.15);
             
-            /* Badge Colors */
+            /* Badge Colors (Standard) */
             --badge-gray-bg: #f1f5f9; --badge-gray-text: #475569; --badge-gray-border: #e2e8f0;
             --badge-blue-bg: #eff6ff; --badge-blue-text: #1d4ed8; --badge-blue-border: #dbeafe;
             --badge-indigo-bg: #eef2ff; --badge-indigo-text: #4338ca; --badge-indigo-border: #e0e7ff;
             --badge-emerald-bg: #ecfdf5; --badge-emerald-text: #047857; --badge-emerald-border: #d1fae5;
-            --badge-amber-bg: #fffbeb; --badge-amber-text: #b45309; --badge-amber-border: #fef3c7;
+
+            /* NEW Colors for specific sections */
+            /* Honors: Purple/Violet */
+            --badge-purple-bg: #f3e8ff; --badge-purple-text: #7e22ce; --badge-purple-border: #d8b4fe;
+            /* Scholarship: Teal */
+            --badge-teal-bg: #ccfbf1; --badge-teal-text: #0f766e; --badge-teal-border: #99f6e4;
+            /* Projects: Rose */
+            --badge-rose-bg: #ffe4e6; --badge-rose-text: #be123c; --badge-rose-border: #fecdd3;
             
             /* Gradients */
             --grad-cvpr: linear-gradient(135deg, #0ea5e9, #2563eb);
@@ -60,7 +67,11 @@
             --badge-blue-bg: #1e3a8a; --badge-blue-text: #bfdbfe; --badge-blue-border: #1d4ed8;
             --badge-indigo-bg: #312e81; --badge-indigo-text: #c7d2fe; --badge-indigo-border: #4338ca;
             --badge-emerald-bg: #064e3b; --badge-emerald-text: #6ee7b7; --badge-emerald-border: #059669;
-            --badge-amber-bg: #451a03; --badge-amber-text: #fcd34d; --badge-amber-border: #78350f;
+
+            /* Dark Mode New Colors */
+            --badge-purple-bg: #581c87; --badge-purple-text: #e9d5ff; --badge-purple-border: #6b21a8;
+            --badge-teal-bg: #115e59; --badge-teal-text: #99f6e4; --badge-teal-border: #134e4a;
+            --badge-rose-bg: #881337; --badge-rose-text: #fecdd3; --badge-rose-border: #9f1239;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; transition: all 0.25s ease; }
@@ -97,10 +108,15 @@
             margin-bottom: 90px; animation: slideUp 0.8s ease-out forwards;
         }
 
-        .hero-left { position: relative; }
+        .hero-left { position: relative; display: flex; justify-content: center;}
         .hero-img {
-            width: 220px; height: 220px; border-radius: 28px;
-            object-fit: cover; border: 1px solid var(--glass-border);
+            /* Modified: Narrower width and top alignment */
+            width: 200px; 
+            height: 220px; 
+            border-radius: 28px;
+            object-fit: cover; 
+            object-position: top center; /* Prevents top (head) cropping */
+            border: 1px solid var(--glass-border);
             box-shadow: 0 20px 40px -10px var(--primary-glow);
             background: var(--bg-body);
         }
@@ -108,13 +124,21 @@
         .hero-right { padding-top: 5px; }
         .hero-name {
             font-family: 'Outfit', sans-serif; font-size: 3.8rem; font-weight: 800;
-            line-height: 1.1; margin-bottom: 16px; letter-spacing: -0.02em;
+            /* Modified: Increased line-height and padding to prevent clipping of 'g' */
+            line-height: 1.25; 
+            padding-bottom: 4px; 
+            margin-bottom: 12px; 
+            letter-spacing: -0.02em;
             background: linear-gradient(135deg, var(--text-main) 20%, var(--primary) 100%);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
 
         .hero-intro { font-size: 1.2rem; color: var(--text-sub); margin-bottom: 24px; }
         .hero-intro strong { color: var(--primary); font-weight: 700; }
+        
+        /* New class for CMU Red */
+        .hero-intro .cmu-red { color: #C41E3A; } 
+        [data-theme="dark"] .hero-intro .cmu-red { color: #ff4d6d; }
 
         .tag-container { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 24px; }
         .tag-pill {
@@ -181,7 +205,7 @@
         
         .exp-org { 
             font-family: 'Outfit', sans-serif; 
-            font-size: 1.25rem; /* Matched to Pub Title */
+            font-size: 1.25rem; 
             font-weight: 800; 
             color: var(--text-main); 
             line-height: 1.3;
@@ -248,22 +272,30 @@
         .mini-desc { font-size: 0.95rem; color: var(--text-sub); margin-bottom: 14px; flex-grow: 1; }
         
         /* Interactive Award/Project Badges */
-        .award-badge, .proj-badge {
+        .award-badge, .proj-badge, .scholar-badge {
             align-self: flex-start;
             font-size: 0.8rem; font-weight: 700;
             padding: 4px 10px; border-radius: 6px;
             cursor: default; transition: all 0.2s;
         }
 
+        /* Honors: Purple/Violet */
         .award-badge {
-            color: var(--badge-amber-text); background: var(--badge-amber-bg); border: 1px solid var(--badge-amber-border);
+            color: var(--badge-purple-text); background: var(--badge-purple-bg); border: 1px solid var(--badge-purple-border);
         }
-        .award-badge:hover { transform: translateY(-2px); box-shadow: 0 4px 6px rgba(180, 83, 9, 0.1); }
+        .award-badge:hover { transform: translateY(-2px); box-shadow: 0 4px 6px rgba(124, 58, 237, 0.15); }
 
-        .proj-badge {
-            color: var(--primary); background: var(--badge-blue-bg); border: 1px solid var(--badge-blue-border);
+        /* Scholarship: Teal */
+        .scholar-badge {
+            color: var(--badge-teal-text); background: var(--badge-teal-bg); border: 1px solid var(--badge-teal-border);
         }
-        .proj-badge:hover { transform: translateY(-2px); box-shadow: 0 4px 6px rgba(37, 99, 235, 0.1); }
+        .scholar-badge:hover { transform: translateY(-2px); box-shadow: 0 4px 6px rgba(13, 148, 136, 0.15); }
+
+        /* Projects: Rose/Red/Pink */
+        .proj-badge {
+            color: var(--badge-rose-text); background: var(--badge-rose-bg); border: 1px solid var(--badge-rose-border);
+        }
+        .proj-badge:hover { transform: translateY(-2px); box-shadow: 0 4px 6px rgba(225, 29, 72, 0.15); }
 
         /* Animations */
         @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
@@ -272,7 +304,7 @@
         /* Responsive */
         @media (max-width: 768px) {
             .hero { grid-template-columns: 1fr; text-align: center; gap: 30px; justify-items: center; }
-            .hero-img { width: 250px; height: 250px; }
+            .hero-img { width: 220px; height: 220px; } /* Reset width for mobile if needed, or keep narrow */
             .tag-container, .social-icons { justify-content: center; }
             .grid-split { grid-template-columns: 1fr; }
             .pub-header { flex-direction: column; align-items: flex-start; gap: 8px; }
@@ -299,7 +331,7 @@
                 <div class="hero-name">Jaehun Bang</div>
                 <div class="hero-intro">
                     M.S. Student at <strong>UNIST</strong><br>
-                    Visiting Researcher at <strong>CMU</strong>
+                    Visiting Researcher at <strong class="cmu-red">CMU</strong>
                 </div>
                 
                 <div class="tag-container">
@@ -382,7 +414,7 @@
                     <div class="badge-list">
                         <span class="info-pill pill-gray"><i class="fas fa-user-tie"></i> Prof. Deva Ramanan</span>
                         <span class="info-pill pill-indigo"><i class="fas fa-microscope"></i> 3D-LLM</span>
-                        <span class="info-pill pill-indigo"><i class="fas fa-cube"></i> Open-Vocabulary 3D Scene</span>
+                        <span class="info-pill pill-indigo"><i class="fas fa-cube"></i> 3D Scene Understanding</span>
                     </div>
                 </div>
 
@@ -504,7 +536,7 @@
                         <span class="year-badge">2021 - 2023</span>
                     </div>
                     <div class="mini-desc">Silla Culture Scholarship Foundation Corporate</div>
-                    <div class="award-badge">Full-Ride Scholarship</div>
+                    <div class="scholar-badge">Full-Ride Scholarship</div>
                 </div>
 
                 <div class="mini-card">
@@ -513,7 +545,7 @@
                         <span class="year-badge">2018 - 2022</span>
                     </div>
                     <div class="mini-desc">Seoultech</div>
-                    <div class="award-badge">Full-Ride Scholarship</div>
+                    <div class="scholar-badge">Full-Ride Scholarship</div>
                 </div>
 
             </div>
@@ -587,6 +619,3 @@
     </script>
 </body>
 </html>
-
-
-
