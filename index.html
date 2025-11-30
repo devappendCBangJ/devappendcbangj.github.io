@@ -19,6 +19,9 @@
             --text-sub: #334155;
             --text-muted: #64748b;
             
+            /* Natural Monotone Icon Color (Slate-500) */
+            --icon-color: #64748b; 
+            
             /* Glass & Card Vars */
             --glass-bg: rgba(255, 255, 255, 0.95);
             --glass-border: rgba(226, 232, 240, 0.8);
@@ -50,6 +53,7 @@
             --text-main: #f8fafc;
             --text-sub: #cbd5e1;
             --text-muted: #94a3b8;
+            --icon-color: #94a3b8; /* Lighter Slate for Dark Mode */
             
             --glass-bg: rgba(15, 23, 42, 0.85);
             --glass-border: rgba(255, 255, 255, 0.1);
@@ -102,20 +106,21 @@
 
         .hero-left { position: relative; display: flex; justify-content: center;}
         
-        .hero-img-frame {
+        /* FIX: Robust Photo Frame without nested div gaps */
+        .hero-img {
             width: 200px; 
             height: 220px;
             border-radius: 28px;
-            background: var(--glass-bg); 
-            padding: 6px; 
-            box-shadow: 0 20px 40px -10px var(--primary-glow), inset 0 0 0 1px var(--glass-border);
-        }
-
-        .hero-img {
-            width: 100%; height: 100%;
-            border-radius: 22px; 
             object-fit: cover;
             object-position: top center; 
+            
+            /* Creating the frame using border and outline */
+            border: 6px solid var(--glass-bg); /* White Frame */
+            outline: 1px solid var(--glass-border); /* Outer Edge */
+            
+            /* Soft Shadow */
+            box-shadow: 0 20px 40px -10px var(--primary-glow);
+            background: var(--bg-body);
         }
 
         .hero-right { padding-top: 5px; }
@@ -151,30 +156,40 @@
         .social-link { font-size: 1.4rem; color: var(--text-muted); transition: all 0.2s; }
         .social-link:hover { color: var(--primary); transform: translateY(-3px); }
 
-        /* --- Interactive Section Divider --- */
+        /* --- Unified Section Interaction --- */
         .section-header {
             display: flex; align-items: flex-end; gap: 20px; margin-bottom: 24px;
             opacity: 0; animation: slideUp 0.8s ease-out forwards 0.2s;
-            cursor: default;
+            cursor: default; /* Indicates it's interactive */
         }
-        .section-title { font-family: 'Outfit', sans-serif; font-size: 1.8rem; font-weight: 700; color: var(--text-main); line-height: 1; }
         
-        /* Updated Section Line with Shimmer Animation */
+        .section-title { 
+            font-family: 'Outfit', sans-serif; font-size: 1.8rem; font-weight: 700; 
+            color: var(--text-main); line-height: 1; 
+            transition: color 0.3s ease;
+        }
+        
         .section-line { 
             flex-grow: 1; height: 2px; 
             background: linear-gradient(90deg, var(--glass-border) 0%, transparent 100%); 
             margin-bottom: 6px; 
             transform-origin: left;
-            transition: height 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             position: relative;
             overflow: hidden;
+        }
+
+        /* Hover on Header triggers both Title and Line */
+        .section-header:hover .section-title {
+            color: var(--primary);
         }
         
         .section-header:hover .section-line { 
             height: 3px;
-            background: linear-gradient(90deg, var(--primary) 0%, #a855f7 50%, var(--primary) 100%);
+            /* Shimmer Effect Gradient */
+            background: linear-gradient(90deg, var(--primary) 0%, #a855f7 40%, var(--primary) 100%);
             background-size: 200% auto;
-            animation: shimmer 3s linear infinite;
+            animation: shimmer 2s linear infinite;
         }
 
         @keyframes shimmer {
@@ -184,6 +199,7 @@
         /* --- Cards Global --- */
         .card-stack { display: flex; flex-direction: column; gap: 16px; }
         
+        /* Unified Card Style for All Sections */
         .card {
             background: var(--glass-bg); backdrop-filter: blur(10px);
             border: 1px solid var(--glass-border); border-radius: var(--radius-lg);
@@ -192,8 +208,11 @@
             transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
             opacity: 0; animation: slideUp 0.8s ease-out forwards 0.3s;
         }
+        
+        /* Hover Effect for Card Stack */
         .card:hover {
-            border-color: var(--primary); transform: translateY(-4px);
+            border-color: var(--primary); 
+            transform: translateY(-4px); /* Lift up effect */
             box-shadow: var(--hover-shadow);
         }
 
@@ -285,8 +304,8 @@
         
         .mini-title { font-family: 'Outfit', sans-serif; font-size: 1.2rem; font-weight: 700; color: var(--text-main); line-height: 1.25; display: flex; align-items: center; gap: 8px; }
         
-        /* Unified Title Icon Color */
-        .mini-title i { font-size: 1.15rem; color: var(--primary); }
+        /* Unified Natural Monotone Icon Color */
+        .mini-title i { font-size: 1.15rem; color: var(--icon-color); }
         
         .year-badge {
             font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; font-weight: 700;
@@ -327,7 +346,7 @@
         /* Responsive */
         @media (max-width: 768px) {
             .hero { grid-template-columns: 1fr; text-align: center; gap: 30px; justify-items: center; }
-            .hero-img-frame { width: 220px; height: 220px; } 
+            .hero-img { width: 220px; height: 220px; } 
             .tag-container, .social-icons { justify-content: center; }
             .grid-split { grid-template-columns: 1fr; }
             .pub-header { flex-direction: column; align-items: flex-start; gap: 8px; }
@@ -347,9 +366,7 @@
 
         <header class="hero">
             <div class="hero-left">
-                <div class="hero-img-frame">
-                    <img src="jaehun.jpg" alt="Jaehun Bang" class="hero-img">
-                </div>
+                <img src="jaehun.jpg" alt="Jaehun Bang" class="hero-img">
             </div>
             
             <div class="hero-right">
