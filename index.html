@@ -15,39 +15,39 @@
         :root {
             /* Palette */
             --bg-body: #f8fafc;
-            --bg-card: #ffffff;
-            
             --text-main: #0f172a;
             --text-sub: #334155;
             --text-muted: #64748b;
             
-            --primary: #3b82f6;
-            --primary-bg: #eff6ff;
+            /* Glassmorphism Vars */
+            --glass-bg: rgba(255, 255, 255, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.8);
+            --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
             
-            /* Conference Colors */
-            --cvpr-grad: linear-gradient(135deg, #0ea5e9 0%, #2563eb 100%);
-            --wacv-grad: linear-gradient(135deg, #8b5cf6 0%, #d946ef 100%);
-            --sig-grad: linear-gradient(135deg, #f97316 0%, #ef4444 100%);
+            --primary: #2563eb;
+            --primary-glow: rgba(37, 99, 235, 0.3);
             
-            --border: #e2e8f0;
-            --shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03);
-            --shadow-hover: 0 20px 25px -5px rgba(0,0,0,0.08), 0 10px 10px -5px rgba(0,0,0,0.03);
+            /* Gradients */
+            --grad-cvpr: linear-gradient(135deg, #0ea5e9, #2563eb);
+            --grad-wacv: linear-gradient(135deg, #8b5cf6, #d946ef);
+            --grad-sig: linear-gradient(135deg, #f97316, #ef4444);
             
             --radius-xl: 24px;
-            --radius-lg: 18px;
+            --radius-lg: 16px;
         }
 
         [data-theme="dark"] {
             --bg-body: #020617;
-            --bg-card: #0f172a;
             --text-main: #f8fafc;
             --text-sub: #cbd5e1;
             --text-muted: #94a3b8;
+            
+            --glass-bg: rgba(15, 23, 42, 0.6);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            
             --primary: #60a5fa;
-            --primary-bg: #1e3a8a;
-            --border: #1e293b;
-            --shadow: none;
-            --shadow-hover: 0 10px 40px -10px rgba(96, 165, 250, 0.15);
+            --primary-glow: rgba(96, 165, 250, 0.2);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; transition: all 0.25s ease; }
@@ -57,190 +57,194 @@
             background-color: var(--bg-body);
             color: var(--text-main);
             line-height: 1.6;
-            background-image: 
-                radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.05) 0px, transparent 50%),
-                radial-gradient(at 100% 0%, rgba(139, 92, 246, 0.05) 0px, transparent 50%);
-            background-attachment: fixed;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* --- Ambient Background Mesh (The "Aurora" Effect) --- */
+        .ambient-light {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100vh; z-index: -1; pointer-events: none;
+            background: 
+                radial-gradient(circle at 15% 50%, rgba(59, 130, 246, 0.08), transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(139, 92, 246, 0.08), transparent 25%);
         }
 
         .container {
-            max-width: 1000px;
+            max-width: 950px;
             margin: 0 auto;
-            padding: 60px 24px 100px;
+            padding: 40px 24px 100px;
         }
 
         /* --- Theme Toggle --- */
-        .nav-bar { display: flex; justify-content: flex-end; margin-bottom: 50px; }
+        .nav-bar { display: flex; justify-content: flex-end; margin-bottom: 60px; }
         .theme-btn {
-            background: var(--bg-card); border: 1px solid var(--border);
+            background: var(--glass-bg); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
             color: var(--text-sub); padding: 8px 18px; border-radius: 99px;
             cursor: pointer; font-family: 'Outfit', sans-serif; font-weight: 600;
-            display: flex; align-items: center; gap: 8px; box-shadow: var(--shadow);
+            display: flex; align-items: center; gap: 8px; box-shadow: var(--glass-shadow);
         }
-        .theme-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); }
+        .theme-btn:hover { border-color: var(--primary); color: var(--primary); }
 
-        /* --- Hero Section --- */
+        /* --- Hero Section (Editorial Layout) --- */
         .hero {
-            display: grid; grid-template-columns: auto 1fr; gap: 60px; align-items: center;
-            margin-bottom: 90px; animation: fadeUp 0.8s ease-out forwards;
+            display: grid; grid-template-columns: 240px 1fr; gap: 60px; align-items: start;
+            margin-bottom: 100px; animation: slideUp 0.8s ease-out forwards;
         }
-        
-        .hero-img-wrap { position: relative; }
-        .hero-img-wrap::before {
-            content: ''; position: absolute; inset: -15px;
-            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-            filter: blur(40px); opacity: 0.3; border-radius: 50%; z-index: -1;
-        }
+
+        .hero-left { text-align: center; position: relative; }
         .hero-img {
-            width: 220px; height: 220px; border-radius: var(--radius-xl);
-            object-fit: cover; border: 1px solid var(--border); background: var(--bg-card);
-            box-shadow: var(--shadow-hover);
+            width: 240px; height: 240px; border-radius: 24px; /* Squircle */
+            object-fit: cover; border: 1px solid var(--glass-border);
+            box-shadow: 0 20px 40px -10px var(--primary-glow);
+            transform: rotate(-3deg); transition: transform 0.3s;
         }
+        .hero-left:hover .hero-img { transform: rotate(0deg) scale(1.02); }
 
-        .hero-content h1 {
-            font-family: 'Outfit', sans-serif; font-size: 3.5rem; font-weight: 800;
-            margin-bottom: 12px; letter-spacing: -0.03em;
-            background: linear-gradient(135deg, #0f172a 30%, #3b82f6 100%);
+        .hero-right { padding-top: 10px; }
+        .hero-name {
+            font-family: 'Outfit', sans-serif; font-size: 4rem; font-weight: 800;
+            line-height: 1.1; margin-bottom: 20px; letter-spacing: -0.02em;
+            background: linear-gradient(135deg, var(--text-main) 30%, var(--primary) 100%);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
-        [data-theme="dark"] .hero-content h1 {
-            background: linear-gradient(135deg, #f8fafc 30%, #60a5fa 100%);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        [data-theme="dark"] .hero-name {
+             background: linear-gradient(135deg, #fff 30%, #60a5fa 100%);
+             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
 
-        .hero-roles { font-size: 1.25rem; color: var(--text-sub); margin-bottom: 24px; font-weight: 400; }
-        .hero-roles strong { color: var(--primary); font-weight: 700; }
+        .hero-intro { font-size: 1.25rem; color: var(--text-sub); margin-bottom: 30px; font-weight: 400; }
+        .hero-intro strong { color: var(--primary); font-weight: 700; }
 
-        .tag-group { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 30px; }
-        .hero-tag {
-            background: var(--primary-bg); color: var(--primary);
-            padding: 8px 16px; border-radius: 99px; font-size: 0.95rem; font-weight: 600;
-            font-family: 'Outfit', sans-serif; cursor: default;
+        .tag-container { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 30px; }
+        .tag-pill {
+            background: var(--glass-bg); border: 1px solid var(--glass-border);
+            color: var(--text-sub); padding: 8px 16px; border-radius: 99px;
+            font-size: 0.9rem; font-weight: 600; font-family: 'Outfit', sans-serif;
+            backdrop-filter: blur(4px); cursor: default;
         }
-        .hero-tag:hover { transform: translateY(-3px); box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2); }
+        .tag-pill:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); }
 
-        .social-group { display: flex; gap: 16px; }
-        .social-btn { font-size: 1.4rem; color: var(--text-muted); transition: transform 0.2s; }
-        .social-btn:hover { color: var(--primary); transform: translateY(-3px); }
+        .social-icons { display: flex; gap: 16px; }
+        .social-link { font-size: 1.5rem; color: var(--text-muted); transition: all 0.2s; }
+        .social-link:hover { color: var(--primary); transform: translateY(-3px); }
 
-        /* --- Section Titles --- */
+        /* --- Section Styling --- */
         .section-header {
-            display: flex; align-items: flex-end; gap: 20px; margin-bottom: 24px;
-            animation: fadeUp 0.8s ease-out forwards 0.2s; opacity: 0;
+            display: flex; align-items: flex-end; gap: 20px; margin-bottom: 30px;
+            opacity: 0; animation: slideUp 0.8s ease-out forwards 0.2s;
         }
-        .section-title {
-            font-family: 'Outfit', sans-serif; font-size: 1.8rem; font-weight: 700; color: var(--text-main); line-height: 1;
-        }
-        .section-line {
-            flex-grow: 1; height: 1px; background: var(--border); margin-bottom: 6px; position: relative;
-        }
-        .section-header:hover .section-line::after {
-            content: ''; position: absolute; left: 0; top: 0; width: 100%; height: 100%;
-            background: linear-gradient(90deg, var(--primary), transparent); animation: fillLine 0.8s forwards;
-        }
+        .section-title { font-family: 'Outfit', sans-serif; font-size: 2rem; font-weight: 700; color: var(--text-main); line-height: 1; }
+        .section-line { flex-grow: 1; height: 1px; background: var(--border); margin-bottom: 8px; }
 
-        /* --- Cards Global --- */
-        .card-stack { display: flex; flex-direction: column; gap: 20px; }
-        
-        .card {
-            background: var(--bg-card); border: 1px solid var(--border);
-            border-radius: var(--radius-lg); padding: 26px 30px;
+        /* --- Glass Cards Global --- */
+        .card-stack { display: flex; flex-direction: column; gap: 24px; }
+        .glass-card {
+            background: var(--glass-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border); border-radius: var(--radius-lg);
+            padding: 28px; box-shadow: var(--glass-shadow);
             transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-            animation: fadeUp 0.8s ease-out forwards 0.4s; opacity: 0;
-            position: relative; overflow: hidden;
+            opacity: 0; animation: slideUp 0.8s ease-out forwards 0.3s;
         }
-        .card::before {
-            content: ''; position: absolute; left: 0; top: 0; width: 4px; height: 100%;
-            background: var(--primary); opacity: 0; transition: opacity 0.3s;
+        .glass-card:hover {
+            border-color: var(--primary); transform: translateY(-5px);
+            box-shadow: 0 15px 30px -5px var(--primary-glow);
         }
-        .card:hover {
-            border-color: var(--primary); box-shadow: var(--shadow-hover); transform: translateY(-4px);
-        }
-        .card:hover::before { opacity: 1; }
 
-        /* --- Publications Styling --- */
+        /* --- Publications --- */
         .pub-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
-        
-        /* Unique Conference Badges */
-        .conf-badge {
+        .conf-tag {
             font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 0.85rem; color: white;
-            padding: 5px 12px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 6px 14px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
-        .conf-cvpr { background: var(--cvpr-grad); }
-        .conf-wacv { background: var(--wacv-grad); }
-        .conf-sig { background: var(--sig-grad); }
+        .bg-cvpr { background: var(--grad-cvpr); }
+        .bg-wacv { background: var(--grad-wacv); }
+        .bg-sig { background: var(--grad-sig); }
 
-        .pub-status { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
-        .st-review { color: #f59e0b; }
-        .st-accept { color: var(--primary); }
+        .status-dot-wrap { display: flex; align-items: center; gap: 6px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
+        .dot { width: 8px; height: 8px; border-radius: 50%; }
+        .dot-pulse { animation: pulse 2s infinite; }
         
-        .pub-title { font-size: 1.25rem; font-weight: 700; margin-bottom: 8px; line-height: 1.35; color: var(--text-main); }
+        .st-review { color: #f59e0b; }
+        .dot-review { background: #f59e0b; }
+        .st-accept { color: var(--primary); }
+        .dot-accept { background: var(--primary); }
+
+        .pub-title { font-size: 1.3rem; font-weight: 700; line-height: 1.3; margin-bottom: 8px; color: var(--text-main); }
         .pub-authors { font-size: 1rem; color: var(--text-sub); }
         .me { color: var(--text-main); font-weight: 700; border-bottom: 2px solid var(--primary); }
 
-        /* --- Experience & Education Styling --- */
-        .info-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
-        .info-org { font-family: 'Outfit', sans-serif; font-size: 1.4rem; font-weight: 800; color: var(--text-main); }
-        
-        /* Enhanced Date Style */
-        .info-date {
-            font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; font-weight: 600;
-            color: var(--text-sub); background: var(--border); padding: 4px 12px; border-radius: 6px;
+        /* --- Timeline Layout for Experience --- */
+        .timeline-card {
+            display: grid; grid-template-columns: 6px 1fr; gap: 24px; padding-left: 0; overflow: visible;
         }
+        .timeline-bar {
+            width: 4px; background: var(--border); border-radius: 4px; height: 100%; margin-left: 24px; position: relative;
+        }
+        .timeline-bar::after { /* Active Dot */
+            content: ''; position: absolute; top: 24px; left: -5px; width: 14px; height: 14px;
+            background: var(--bg-body); border: 3px solid var(--primary); border-radius: 50%;
+        }
+        .card:hover .timeline-bar::after { background: var(--primary); }
 
-        .info-role { font-size: 1.15rem; color: var(--primary); font-weight: 600; margin-bottom: 16px; }
-        
-        /* Active Badges (Always Colorful) */
+        .exp-content { padding-right: 20px; }
+        .exp-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; }
+        .exp-org { font-family: 'Outfit', sans-serif; font-size: 1.4rem; font-weight: 800; color: var(--text-main); }
+        .exp-date { font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; font-weight: 700; color: var(--text-muted); }
+        .exp-role { font-size: 1.15rem; color: var(--primary); font-weight: 600; margin-bottom: 14px; }
+
+        /* Badge List (Always Colored) */
         .badge-list { display: flex; flex-wrap: wrap; gap: 10px; }
-        .info-badge {
+        .info-pill {
             display: inline-flex; align-items: center; gap: 8px;
-            font-size: 0.95rem; font-weight: 500; color: var(--text-main);
-            background: var(--primary-bg); padding: 8px 16px; border-radius: 10px;
-            border: 1px solid transparent; transition: transform 0.2s;
+            font-size: 0.9rem; font-weight: 500; color: var(--text-main);
+            background: rgba(59, 130, 246, 0.08); padding: 8px 14px; border-radius: 8px;
+            border: 1px solid transparent; transition: all 0.2s;
         }
-        .info-badge i { color: var(--primary); font-size: 0.9rem; }
-        .info-badge:hover { transform: scale(1.02); border-color: var(--primary); }
+        .info-pill i { color: var(--primary); }
+        .glass-card:hover .info-pill { background: rgba(59, 130, 246, 0.15); border-color: rgba(59, 130, 246, 0.3); }
 
-        /* --- Split Grid for Awards & Projects --- */
+        /* --- Grid Split (Awards & Projects) --- */
         .grid-split {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px;
-            animation: fadeUp 0.8s ease-out forwards 0.6s; opacity: 0;
+            display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 20px;
+            opacity: 0; animation: slideUp 0.8s ease-out forwards 0.5s;
         }
-        .grid-card {
-            background: var(--bg-card); border: 1px solid var(--border);
-            border-radius: var(--radius-lg); padding: 24px;
-            height: 100%; display: flex; flex-direction: column;
+        .mini-card {
+            background: var(--glass-bg); backdrop-filter: blur(12px); border: 1px solid var(--glass-border);
+            border-radius: var(--radius-lg); padding: 24px; display: flex; flex-direction: column;
             transition: all 0.3s;
         }
-        .grid-card:hover { border-color: var(--primary); box-shadow: var(--shadow-hover); transform: translateY(-4px); }
+        .mini-card:hover { border-color: var(--primary); transform: translateY(-4px); box-shadow: var(--glass-shadow); }
 
-        .grid-head { display: flex; justify-content: space-between; align-items: start; margin-bottom: 8px; }
-        .grid-title { font-family: 'Outfit', sans-serif; font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
-        .grid-year { font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; font-weight: 600; color: var(--text-muted); white-space: nowrap; margin-left: 10px; }
-        .grid-desc { font-size: 0.95rem; color: var(--text-sub); margin-bottom: 16px; flex-grow: 1; }
+        .mini-head { display: flex; justify-content: space-between; align-items: start; margin-bottom: 8px; }
+        .mini-title { font-family: 'Outfit', sans-serif; font-size: 1.1rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+        .mini-year { font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; font-weight: 700; color: var(--text-muted); }
+        .mini-desc { font-size: 0.95rem; color: var(--text-sub); margin-bottom: 16px; flex-grow: 1; }
         
-        .grid-badge {
+        .mini-badge {
             align-self: flex-start;
             font-size: 0.8rem; font-weight: 700; color: var(--primary);
-            background: var(--primary-bg); padding: 6px 12px; border-radius: 6px;
+            background: rgba(59, 130, 246, 0.1); padding: 6px 12px; border-radius: 6px;
         }
 
         /* Animations */
-        @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes fillLine { from { width: 0; } to { width: 100%; } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.4); } 70% { box-shadow: 0 0 0 6px rgba(245, 158, 11, 0); } 100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); } }
 
         /* Responsive */
-        @media (max-width: 768px) {
+        @media (max-width: 800px) {
             .hero { grid-template-columns: 1fr; text-align: center; gap: 40px; justify-items: center; }
-            .hero-content h1 { font-size: 3rem; }
-            .tag-group, .social-group { justify-content: center; }
+            .hero-img { transform: rotate(0); width: 200px; height: 200px; }
+            .tag-container, .social-icons { justify-content: center; }
             .grid-split { grid-template-columns: 1fr; }
-            .pub-header { flex-direction: column; align-items: flex-start; gap: 8px; }
-            .info-head { flex-direction: column; align-items: flex-start; gap: 4px; }
+            .timeline-card { grid-template-columns: 1fr; padding-left: 24px; }
+            .timeline-bar { display: none; }
         }
     </style>
 </head>
 <body>
+
+    <div class="ambient-light"></div>
 
     <div class="container">
         
@@ -251,25 +255,28 @@
         </nav>
 
         <header class="hero">
-            <div class="hero-img-wrap">
+            <div class="hero-left">
                 <img src="profile.jpg" alt="Jaehun Bang" class="hero-img">
             </div>
-            <div class="hero-content">
-                <h1>Jaehun Bang</h1>
-                <div class="hero-roles">
+            
+            <div class="hero-right">
+                <div class="hero-name">Jaehun Bang</div>
+                <div class="hero-intro">
                     M.S. Student at <strong>UNIST</strong><br>
                     Visiting Researcher at <strong>CMU</strong>
                 </div>
-                <div class="tag-group">
-                    <span class="hero-tag">3D-LLM</span>
-                    <span class="hero-tag">VLM / VLA</span>
-                    <span class="hero-tag">3D Gaussian Splatting</span>
+                
+                <div class="tag-container">
+                    <span class="tag-pill">3D-LLM</span>
+                    <span class="tag-pill">VLM / VLA</span>
+                    <span class="tag-pill">3D Gaussian Splatting</span>
                 </div>
-                <div class="social-group">
-                    <a href="mailto:dev.appendCBangJ@gmail.com" class="social-btn"><i class="fas fa-envelope"></i></a>
-                    <a href="https://github.com/devappendCBangJ" class="social-btn" target="_blank"><i class="fab fa-github"></i></a>
-                    <a href="https://www.linkedin.com/in/jaehun-bang-70b6172b8/" class="social-btn" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="#" class="social-btn"><i class="fas fa-graduation-cap"></i></a>
+
+                <div class="social-icons">
+                    <a href="mailto:dev.appendCBangJ@gmail.com" class="social-link"><i class="fas fa-envelope"></i></a>
+                    <a href="https://github.com/devappendCBangJ" class="social-link" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/jaehun-bang-70b6172b8/" class="social-link" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="social-link"><i class="fas fa-graduation-cap"></i></a>
                 </div>
             </div>
         </header>
@@ -280,10 +287,13 @@
                 <div class="section-line"></div>
             </div>
             <div class="card-stack">
-                <div class="card">
+                
+                <div class="glass-card">
                     <div class="pub-header">
-                        <span class="conf-badge conf-cvpr">CVPR 2026</span>
-                        <span class="pub-status st-review">Under Review</span>
+                        <span class="conf-tag bg-cvpr">CVPR 2026</span>
+                        <div class="status-dot-wrap st-review">
+                            <span class="dot dot-review dot-pulse"></span> Under Review
+                        </div>
                     </div>
                     <div class="pub-title">LightSplat: Fast and Memory-Efficient Open-Vocabulary 3D Scene Understanding in Five Seconds</div>
                     <div class="pub-authors">
@@ -291,10 +301,12 @@
                     </div>
                 </div>
 
-                <div class="card">
+                <div class="glass-card">
                     <div class="pub-header">
-                        <span class="conf-badge conf-wacv">WACV 2026</span>
-                        <span class="pub-status st-accept">Accepted</span>
+                        <span class="conf-tag bg-wacv">WACV 2026</span>
+                        <div class="status-dot-wrap st-accept">
+                            <span class="dot dot-accept"></span> Accepted
+                        </div>
                     </div>
                     <div class="pub-title">Beyond the Highlights: Video Retrieval with Salient and Surrounding Contexts</div>
                     <div class="pub-authors">
@@ -302,16 +314,19 @@
                     </div>
                 </div>
 
-                <div class="card">
+                <div class="glass-card">
                     <div class="pub-header">
-                        <span class="conf-badge conf-sig">SIGGRAPH ASIA 2025</span>
-                        <span class="pub-status st-accept">Accepted</span>
+                        <span class="conf-tag bg-sig">SIGGRAPH ASIA 2025</span>
+                        <div class="status-dot-wrap st-accept">
+                            <span class="dot dot-accept"></span> Accepted
+                        </div>
                     </div>
                     <div class="pub-title">Rigidity-Aware 3D Gaussian Deformation from a Single Image</div>
                     <div class="pub-authors">
                         Jinhyeok Kim, <span class="me">Jaehun Bang</span>, Seunghyun Seo, Kyungdon Joo
                     </div>
                 </div>
+
             </div>
         </section>
 
@@ -321,31 +336,39 @@
                 <div class="section-line"></div>
             </div>
             <div class="card-stack">
-                <div class="card">
-                    <div class="info-head">
-                        <div class="info-org">Carnegie Mellon University (CMU)</div>
-                        <div class="info-date">Aug. 2025 - Present</div>
-                    </div>
-                    <div class="info-role">Visiting Researcher</div>
-                    <div class="badge-list">
-                        <span class="info-badge"><i class="fas fa-user-tie"></i> Prof. Deva Ramanan</span>
-                        <span class="info-badge"><i class="fas fa-lightbulb"></i> 3D-LLM</span>
-                        <span class="info-badge"><i class="fas fa-cube"></i> Open-Vocabulary 3D Scene</span>
+                
+                <div class="glass-card timeline-card">
+                    <div class="timeline-bar"></div>
+                    <div class="exp-content">
+                        <div class="exp-header">
+                            <div class="exp-org">Carnegie Mellon University (CMU)</div>
+                            <div class="exp-date">Aug. 2025 - Present</div>
+                        </div>
+                        <div class="exp-role">Visiting Researcher</div>
+                        <div class="badge-list">
+                            <span class="info-pill"><i class="fas fa-user-tie"></i> Prof. Deva Ramanan</span>
+                            <span class="info-pill"><i class="fas fa-lightbulb"></i> 3D-LLM</span>
+                            <span class="info-pill"><i class="fas fa-cube"></i> Open-Vocabulary 3D Scene</span>
+                        </div>
                     </div>
                 </div>
 
-                <div class="card">
-                    <div class="info-head">
-                        <div class="info-org">POSTECH</div>
-                        <div class="info-date">Jan. 2024 - Aug. 2024</div>
-                    </div>
-                    <div class="info-role">Research Intern</div>
-                    <div class="badge-list">
-                        <span class="info-badge"><i class="fas fa-user-tie"></i> Prof. Tae-Hyun Oh</span>
-                        <span class="info-badge"><i class="fas fa-video"></i> Video-LLM</span>
-                        <span class="info-badge"><i class="fas fa-eye"></i> Vision-Language Model</span>
+                <div class="glass-card timeline-card">
+                    <div class="timeline-bar"></div>
+                    <div class="exp-content">
+                        <div class="exp-header">
+                            <div class="exp-org">POSTECH</div>
+                            <div class="exp-date">Jan. 2024 - Aug. 2024</div>
+                        </div>
+                        <div class="exp-role">Research Intern</div>
+                        <div class="badge-list">
+                            <span class="info-pill"><i class="fas fa-user-tie"></i> Prof. Tae-Hyun Oh</span>
+                            <span class="info-pill"><i class="fas fa-video"></i> Video-LLM</span>
+                            <span class="info-pill"><i class="fas fa-eye"></i> Vision-Language Model</span>
+                        </div>
                     </div>
                 </div>
+
             </div>
         </section>
 
@@ -355,27 +378,27 @@
                 <div class="section-line"></div>
             </div>
             <div class="card-stack">
-                <div class="card">
-                    <div class="info-head">
-                        <div class="info-org">UNIST</div>
-                        <div class="info-date">Sep. 2024 - Present</div>
+                <div class="glass-card">
+                    <div class="exp-header">
+                        <div class="exp-org">UNIST</div>
+                        <div class="exp-date">Sep. 2024 - Present</div>
                     </div>
-                    <div class="info-role">M.S. in Artificial Intelligence</div>
+                    <div class="exp-role">M.S. in Artificial Intelligence</div>
                     <div class="badge-list">
-                        <span class="info-badge"><i class="fas fa-chalkboard-teacher"></i> Prof. Kyungdon Joo</span>
-                        <span class="info-badge"><i class="fas fa-star"></i> GPA: 4.3 / 4.3</span>
+                        <span class="info-pill"><i class="fas fa-chalkboard-teacher"></i> Prof. Kyungdon Joo</span>
+                        <span class="info-pill"><i class="fas fa-star"></i> GPA: 4.3 / 4.3</span>
                     </div>
                 </div>
 
-                <div class="card">
-                    <div class="info-head">
-                        <div class="info-org">SEOULTECH</div>
-                        <div class="info-date">Mar. 2018 - Aug. 2024</div>
+                <div class="glass-card">
+                    <div class="exp-header">
+                        <div class="exp-org">SEOULTECH</div>
+                        <div class="exp-date">Mar. 2018 - Aug. 2024</div>
                     </div>
-                    <div class="info-role">B.S. in Mechanical System Design Engineering</div>
+                    <div class="exp-role">B.S. in Mechanical System Design Engineering</div>
                     <div class="badge-list">
-                        <span class="info-badge"><i class="fas fa-star"></i> GPA: 4.4 / 4.5 (Rank: 1/40)</span>
-                        <span class="info-badge"><i class="fas fa-code-branch"></i> Minor: Applied AI</span>
+                        <span class="info-pill"><i class="fas fa-star"></i> GPA: 4.4 / 4.5 (Rank: 1/40)</span>
+                        <span class="info-pill"><i class="fas fa-code-branch"></i> Minor: Applied AI</span>
                     </div>
                 </div>
             </div>
@@ -387,40 +410,40 @@
                 <div class="section-line"></div>
             </div>
             <div class="grid-split">
-                <div class="grid-card">
-                    <div class="grid-head">
-                        <div class="grid-title">International Robot Contest</div>
-                        <div class="grid-year">2022</div>
+                <div class="mini-card">
+                    <div class="mini-head">
+                        <div class="mini-title">International Robot Contest</div>
+                        <div class="mini-year">2022</div>
                     </div>
-                    <div class="grid-desc">Intelligent Robot Division</div>
-                    <div class="grid-badge">Prime Minister's Award</div>
+                    <div class="mini-desc">Intelligent Robot Division</div>
+                    <div class="mini-badge">Prime Minister's Award</div>
                 </div>
 
-                <div class="grid-card">
-                    <div class="grid-head">
-                        <div class="grid-title">LINC 3.0 Capstone Design</div>
-                        <div class="grid-year">2024</div>
+                <div class="mini-card">
+                    <div class="mini-head">
+                        <div class="mini-title">LINC 3.0 Capstone Design</div>
+                        <div class="mini-year">2024</div>
                     </div>
-                    <div class="grid-desc">School-wide Competition</div>
-                    <div class="grid-badge">2nd Place</div>
+                    <div class="mini-desc">School-wide Competition</div>
+                    <div class="mini-badge">2nd Place</div>
                 </div>
 
-                <div class="grid-card">
-                    <div class="grid-head">
-                        <div class="grid-title">International Robot Contest</div>
-                        <div class="grid-year">2022</div>
+                <div class="mini-card">
+                    <div class="mini-head">
+                        <div class="mini-title">International Robot Contest</div>
+                        <div class="mini-year">2022</div>
                     </div>
-                    <div class="grid-desc">Intelligent Robot Division</div>
-                    <div class="grid-badge">1st Place</div>
+                    <div class="mini-desc">Intelligent Robot Division</div>
+                    <div class="mini-badge">1st Place</div>
                 </div>
 
-                <div class="grid-card">
-                    <div class="grid-head">
-                        <div class="grid-title">Silla Culture Scholarship</div>
-                        <div class="grid-year">Multiple</div>
+                <div class="mini-card">
+                    <div class="mini-head">
+                        <div class="mini-title">Silla Culture Scholarship</div>
+                        <div class="mini-year">Multiple</div>
                     </div>
-                    <div class="grid-desc">Academic Excellence</div>
-                    <div class="grid-badge">Full-Ride Scholarship</div>
+                    <div class="mini-desc">Academic Excellence</div>
+                    <div class="mini-badge">Full-Ride Scholarship</div>
                 </div>
             </div>
         </section>
@@ -431,40 +454,40 @@
                 <div class="section-line"></div>
             </div>
             <div class="grid-split">
-                <div class="grid-card">
-                    <div class="grid-head">
-                        <div class="grid-title">Hyundai CTO AI Competition</div>
-                        <div class="grid-year">2023</div>
+                <div class="mini-card">
+                    <div class="mini-head">
+                        <div class="mini-title">Hyundai CTO AI Competition</div>
+                        <div class="mini-year">2023</div>
                     </div>
-                    <div class="grid-desc">AI solutions for autonomous driving scenarios.</div>
-                    <div class="grid-badge">Top 30</div>
+                    <div class="mini-desc">AI solutions for autonomous driving.</div>
+                    <div class="mini-badge">Top 30</div>
                 </div>
 
-                <div class="grid-card">
-                    <div class="grid-head">
-                        <div class="grid-title">Google Solution Challenge</div>
-                        <div class="grid-year">2023</div>
+                <div class="mini-card">
+                    <div class="mini-head">
+                        <div class="mini-title">Google Solution Challenge</div>
+                        <div class="mini-year">2023</div>
                     </div>
-                    <div class="grid-desc">Solution for UN Sustainable Development Goals.</div>
-                    <div class="grid-badge">Top 5%</div>
+                    <div class="mini-desc">Solution for UN Sustainable Goals.</div>
+                    <div class="mini-badge">Top 5%</div>
+                </div>
+                
+                <div class="mini-card">
+                    <div class="mini-head">
+                        <div class="mini-title">Coffee Delivery Robot</div>
+                        <div class="mini-year">2023</div>
+                    </div>
+                    <div class="mini-desc">National Information Society Agency.</div>
+                    <div class="mini-badge">1st Place</div>
                 </div>
 
-                <div class="grid-card">
-                    <div class="grid-head">
-                        <div class="grid-title">Coffee Delivery Robot</div>
-                        <div class="grid-year">2023</div>
+                 <div class="mini-card">
+                    <div class="mini-head">
+                        <div class="mini-title">Musculoskeletal Risk AI</div>
+                        <div class="mini-year">2022</div>
                     </div>
-                    <div class="grid-desc">National Information Society Agency (NISA).</div>
-                    <div class="grid-badge">1st Place</div>
-                </div>
-
-                <div class="grid-card">
-                    <div class="grid-head">
-                        <div class="grid-title">Musculoskeletal Risk AI</div>
-                        <div class="grid-year">2022</div>
-                    </div>
-                    <div class="grid-desc">Manufacturing safety hackathon.</div>
-                    <div class="grid-badge">Top 5</div>
+                    <div class="mini-desc">Manufacturing safety hackathon.</div>
+                    <div class="mini-badge">Top 5</div>
                 </div>
             </div>
         </section>
