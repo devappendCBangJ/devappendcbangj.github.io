@@ -29,22 +29,11 @@
             --primary-glow: rgba(37, 99, 235, 0.15);
             
             /* --- BADGE COLORS --- */
-            
-            /* Gray (Standard) */
             --badge-gray-bg: #f1f5f9; --badge-gray-text: #475569; --badge-gray-border: #cbd5e1;
-            /* Emerald (GPA) */
             --badge-emerald-bg: #ecfdf5; --badge-emerald-text: #047857; --badge-emerald-border: #6ee7b7;
-
-            /* Honors & CMU: Dark Red */
             --badge-red-bg: #fef2f2; --badge-red-text: #991b1b; --badge-red-border: #fca5a5;
-            
-            /* POSTECH: Deeper Navy (Updated for stronger background) */
             --badge-navy-bg: #dbeafe; --badge-navy-text: #172554; --badge-navy-border: #93c5fd;
-
-            /* Projects: Deep Indigo */
             --badge-indigo-bg: #e0e7ff; --badge-indigo-text: #312e81; --badge-indigo-border: #a5b4fc;
-            
-            /* Scholarship: Gold/Amber (New Distinct Color) */
             --badge-gold-bg: #fffbeb; --badge-gold-text: #b45309; --badge-gold-border: #fcd34d;
             
             /* Conference Gradients */
@@ -71,7 +60,6 @@
             /* Dark Mode Adjustments */
             --badge-gray-bg: #1e293b; --badge-gray-text: #94a3b8; --badge-gray-border: #475569;
             --badge-emerald-bg: #064e3b; --badge-emerald-text: #6ee7b7; --badge-emerald-border: #059669;
-
             --badge-red-bg: #7f1d1d; --badge-red-text: #fca5a5; --badge-red-border: #b91c1c;
             --badge-navy-bg: #1e3a8a; --badge-navy-text: #dbeafe; --badge-navy-border: #2563eb;
             --badge-indigo-bg: #312e81; --badge-indigo-text: #c7d2fe; --badge-indigo-border: #4f46e5;
@@ -114,18 +102,22 @@
 
         .hero-left { position: relative; display: flex; justify-content: center;}
         
-        /* Updated Photo Styling for Better Composition */
-        .hero-img {
+        /* FIX: New Photo Frame Container */
+        .hero-img-frame {
             width: 200px; 
-            height: 220px; 
+            height: 220px;
             border-radius: 28px;
-            object-fit: cover; 
+            background: var(--glass-bg); /* White frame color */
+            padding: 6px; /* Thickness of the white frame */
+            /* Smooth shadow and subtle inner border for definition */
+            box-shadow: 0 20px 40px -10px var(--primary-glow), inset 0 0 0 1px var(--glass-border);
+        }
+
+        .hero-img {
+            width: 100%; height: 100%;
+            border-radius: 22px; /* Slightly smaller radius to fit inside frame */
+            object-fit: cover;
             object-position: top center; 
-            /* Added white border/padding for frame effect */
-            border: 5px solid var(--glass-bg);
-            outline: 1px solid var(--glass-border);
-            box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.15);
-            background: var(--bg-body);
         }
 
         .hero-right { padding-top: 5px; }
@@ -169,14 +161,12 @@
         }
         .section-title { font-family: 'Outfit', sans-serif; font-size: 1.8rem; font-weight: 700; color: var(--text-main); line-height: 1; }
         
-        /* Prettier Interaction */
         .section-line { 
             flex-grow: 1; height: 2px; 
             background: linear-gradient(90deg, var(--glass-border) 0%, transparent 100%); 
             margin-bottom: 6px; 
             transform-origin: left;
             transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-            position: relative;
         }
         
         .section-header:hover .section-line { 
@@ -201,7 +191,7 @@
         }
 
         /* --- Publications --- */
-        .pub-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+        .pub-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
         
         .conf-tag {
             font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 0.85rem; color: white;
@@ -213,7 +203,12 @@
         .bg-wacv { background: var(--grad-wacv); }
         .bg-sig { background: var(--grad-sig); }
 
-        .status-dot-wrap { display: flex; align-items: center; gap: 6px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
+        .status-dot-wrap { 
+            display: flex; align-items: center; gap: 6px; 
+            font-size: 0.8rem; font-weight: 700; text-transform: uppercase; 
+            /* FIX: Reduced kerning */
+            letter-spacing: 0; 
+        }
         .dot { width: 8px; height: 8px; border-radius: 50%; }
         .dot-pulse { animation: pulse 2s infinite; }
         
@@ -222,7 +217,8 @@
         .st-accept { color: var(--primary); }
         .dot-accept { background: var(--primary); }
 
-        .pub-title { font-size: 1.35rem; font-weight: 700; line-height: 1.3; margin-bottom: 6px; color: var(--text-main); letter-spacing: -0.01em; }
+        /* FIX: Increased margin-bottom for spacing */
+        .pub-title { font-size: 1.35rem; font-weight: 700; line-height: 1.3; margin-bottom: 12px; color: var(--text-main); letter-spacing: -0.01em; }
         .pub-authors { font-size: 1rem; color: var(--text-sub); }
         .me { color: var(--text-main); font-weight: 700; border-bottom: 2px solid var(--primary); }
 
@@ -251,7 +247,9 @@
             cursor: default;
         }
 
+        /* FIX: Added hover interaction for Professor Gray Pills */
         .pill-gray { background: var(--badge-gray-bg); color: var(--badge-gray-text); border-color: var(--badge-gray-border); }
+        .pill-gray:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px rgba(37, 99, 235, 0.1); }
         
         .pill-red { background: var(--badge-red-bg); color: var(--badge-red-text); border-color: var(--badge-red-border); }
         .pill-red:hover { transform: translateY(-2px); box-shadow: 0 4px 6px rgba(153, 27, 27, 0.1); }
@@ -281,9 +279,21 @@
 
         .mini-head { display: flex; justify-content: space-between; align-items: start; margin-bottom: 8px; gap: 10px; }
         .mini-title { font-family: 'Outfit', sans-serif; font-size: 1.2rem; font-weight: 700; color: var(--text-main); line-height: 1.25; display: flex; align-items: center; gap: 8px; }
-        /* Icon inside Title */
-        .mini-title i { color: var(--text-sub); font-size: 1.1rem; opacity: 0.8; }
         
+        /* FIX: Title Icons styles & Brand Colors */
+        .mini-title i { font-size: 1.15rem; }
+        .fa-car { color: #002c5f; } /* Hyundai Blue */
+        .fa-google { color: #4285F4; } /* Google Blue */
+        .fa-hard-hat { color: #f59e0b; } /* Safety Orange */
+        .fa-robot.tech-gray { color: #64748b; } /* Tech Gray */
+        .fa-robot.robot-contest { color: #dc2626; } /* Contest Red */
+        .fa-cubes.capstone { color: #2563eb; } /* Design Blue */
+        .fa-laptop-code { color: #0ea5e9; } /* ICT Cyan */
+        .fa-users { color: #ec4899; } /* Club Pink */
+        .fa-microchip { color: #6366f1; } /* Embedded Purple */
+        .fa-university { color: #059669; } /* Scholarship Green */
+
+
         .year-badge {
             font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; font-weight: 700;
             color: var(--text-muted); background: var(--badge-gray-bg); padding: 3px 8px; border-radius: 6px;
@@ -301,19 +311,16 @@
             display: flex; align-items: center; gap: 6px; 
         }
 
-        /* Honors: Dark Red */
         .award-badge {
             color: var(--badge-red-text); background: var(--badge-red-bg); border: 1px solid var(--badge-red-border);
         }
         .award-badge:hover { transform: translateY(-2px); box-shadow: 0 4px 6px rgba(220, 38, 38, 0.2); }
 
-        /* Scholarship: Gold/Amber */
         .scholar-badge {
             color: var(--badge-gold-text); background: var(--badge-gold-bg); border: 1px solid var(--badge-gold-border);
         }
         .scholar-badge:hover { transform: translateY(-2px); box-shadow: 0 4px 6px rgba(180, 83, 9, 0.2); }
 
-        /* Projects: Deep Indigo */
         .proj-badge {
             color: var(--badge-indigo-text); background: var(--badge-indigo-bg); border: 1px solid var(--badge-indigo-border);
         }
@@ -326,7 +333,7 @@
         /* Responsive */
         @media (max-width: 768px) {
             .hero { grid-template-columns: 1fr; text-align: center; gap: 30px; justify-items: center; }
-            .hero-img { width: 220px; height: 220px; } 
+            .hero-img-frame { width: 220px; height: 220px; } 
             .tag-container, .social-icons { justify-content: center; }
             .grid-split { grid-template-columns: 1fr; }
             .pub-header { flex-direction: column; align-items: flex-start; gap: 8px; }
@@ -346,7 +353,9 @@
 
         <header class="hero">
             <div class="hero-left">
-                <img src="jaehun.jpg" alt="Jaehun Bang" class="hero-img">
+                <div class="hero-img-frame">
+                    <img src="jaehun.jpg" alt="Jaehun Bang" class="hero-img">
+                </div>
             </div>
             
             <div class="hero-right">
@@ -500,7 +509,7 @@
                 
                 <div class="mini-card">
                     <div class="mini-head">
-                        <div class="mini-title">International Robot Contest</div>
+                        <div class="mini-title"><i class="fas fa-robot robot-contest"></i> International Robot Contest</div>
                         <span class="year-badge">2022</span>
                     </div>
                     <div class="mini-desc">Autonomous Combat Robot</div>
@@ -509,7 +518,7 @@
 
                 <div class="mini-card">
                     <div class="mini-head">
-                        <div class="mini-title">LINC 3.0 Capstone Design</div>
+                        <div class="mini-title"><i class="fas fa-cubes capstone"></i> LINC 3.0 Capstone Design</div>
                         <span class="year-badge">2024</span>
                     </div>
                     <div class="mini-desc">Autonomous Golf Caddie Robot</div>
@@ -518,7 +527,7 @@
 
                 <div class="mini-card">
                     <div class="mini-head">
-                        <div class="mini-title">Capstone Design Achievement</div>
+                        <div class="mini-title"><i class="fas fa-cubes capstone"></i> Capstone Design Achievement</div>
                         <span class="year-badge">2024</span>
                     </div>
                     <div class="mini-desc">Autonomous Golf Caddie Robot</div>
@@ -527,7 +536,7 @@
 
                 <div class="mini-card">
                     <div class="mini-head">
-                        <div class="mini-title">Hanium ICT Mentoring</div>
+                        <div class="mini-title"><i class="fas fa-laptop-code"></i> Hanium ICT Mentoring</div>
                         <span class="year-badge">2024</span>
                     </div>
                     <div class="mini-desc">Autonomous Golf Caddie Robot</div>
@@ -536,7 +545,7 @@
 
                 <div class="mini-card">
                     <div class="mini-head">
-                        <div class="mini-title">Withus Outstanding Club Award</div>
+                        <div class="mini-title"><i class="fas fa-users"></i> Withus Outstanding Club Award</div>
                         <span class="year-badge">2023</span>
                     </div>
                     <div class="mini-desc">Autonomous Robotics Club</div>
@@ -545,7 +554,7 @@
 
                 <div class="mini-card">
                     <div class="mini-head">
-                        <div class="mini-title">Embedded Software Contest</div>
+                        <div class="mini-title"><i class="fas fa-microchip"></i> Embedded Software Contest</div>
                         <span class="year-badge">2021</span>
                     </div>
                     <div class="mini-desc">Humanoid Robot</div>
@@ -554,7 +563,7 @@
 
                 <div class="mini-card">
                     <div class="mini-head">
-                        <div class="mini-title">Silla Culture Scholarship</div>
+                        <div class="mini-title"><i class="fas fa-university"></i> Silla Culture Scholarship</div>
                         <span class="year-badge">2021 - 2023</span>
                     </div>
                     <div class="mini-desc">Silla Culture Scholarship Foundation</div>
@@ -563,7 +572,7 @@
 
                 <div class="mini-card">
                     <div class="mini-head">
-                        <div class="mini-title">Academic Excellence Scholarship</div>
+                        <div class="mini-title"><i class="fas fa-university"></i> Academic Excellence Scholarship</div>
                         <span class="year-badge">2018 - 2022</span>
                     </div>
                     <div class="mini-desc">Seoultech</div>
@@ -591,7 +600,7 @@
 
                 <div class="mini-card">
                     <div class="mini-head">
-                         <div class="mini-title"><i class="fab fa-google"></i> Google Solution Challenge</div>
+                        <div class="mini-title"><i class="fab fa-google"></i> Google Solution Challenge</div>
                         <span class="year-badge">2023</span>
                     </div>
                     <div class="mini-desc">AI Remote Study Platform</div>
@@ -600,7 +609,7 @@
 
                  <div class="mini-card">
                     <div class="mini-head">
-                         <div class="mini-title"><i class="fas fa-hard-hat"></i> Manufacturing Safety AI Hackathon</div>
+                        <div class="mini-title"><i class="fas fa-hard-hat"></i> Manufacturing Safety AI Hackathon</div>
                         <span class="year-badge">2022</span>
                     </div>
                     <div class="mini-desc">AI for Musculoskeletal Safety</div>
@@ -609,7 +618,7 @@
 
                 <div class="mini-card">
                     <div class="mini-head">
-                         <div class="mini-title"><i class="fas fa-robot"></i> Self-Driving Coffee Delivery Robot</div>
+                        <div class="mini-title"><i class="fas fa-robot tech-gray"></i> Self-Driving Coffee Delivery Robot</div>
                         <span class="year-badge">2023</span>
                     </div>
                     <div class="mini-desc">Autonomous Mobile Robot</div>
