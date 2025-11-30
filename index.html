@@ -28,24 +28,26 @@
             --primary: #2563eb;
             --primary-glow: rgba(37, 99, 235, 0.15);
             
-            /* Badge Colors (Standard) */
+            /* Standard Badges */
             --badge-gray-bg: #f1f5f9; --badge-gray-text: #475569; --badge-gray-border: #e2e8f0;
             --badge-blue-bg: #eff6ff; --badge-blue-text: #1d4ed8; --badge-blue-border: #dbeafe;
-            --badge-indigo-bg: #eef2ff; --badge-indigo-text: #4338ca; --badge-indigo-border: #e0e7ff;
             --badge-emerald-bg: #ecfdf5; --badge-emerald-text: #047857; --badge-emerald-border: #d1fae5;
 
-            /* NEW Colors for specific sections */
-            /* Honors: Purple/Violet */
-            --badge-purple-bg: #f3e8ff; --badge-purple-text: #7e22ce; --badge-purple-border: #d8b4fe;
-            /* Scholarship: Teal */
-            --badge-teal-bg: #ccfbf1; --badge-teal-text: #0f766e; --badge-teal-border: #99f6e4;
-            /* Projects: Rose */
-            --badge-rose-bg: #ffe4e6; --badge-rose-text: #be123c; --badge-rose-border: #fecdd3;
+            /* UPDATED Specific Colors */
             
-            /* Gradients */
-            --grad-cvpr: linear-gradient(135deg, #0ea5e9, #2563eb);
-            --grad-wacv: linear-gradient(135deg, #8b5cf6, #d946ef);
-            --grad-sig: linear-gradient(135deg, #f97316, #ef4444);
+            /* Honors: Dark Red */
+            --badge-red-bg: #fef2f2; --badge-red-text: #991b1b; --badge-red-border: #fecaca;
+            
+            /* Scholarship: Prettier Purple (Vibrant) */
+            --badge-purple-bg: #f5d0fe; --badge-purple-text: #9333ea; --badge-purple-border: #e879f9;
+            
+            /* Projects: Dark Blue */
+            --badge-darkblue-bg: #dbeafe; --badge-darkblue-text: #1e3a8a; --badge-darkblue-border: #93c5fd;
+            
+            /* Conference Gradients (Darker/Deeper) */
+            --grad-cvpr: linear-gradient(135deg, #003366, #0056b3); /* Dark Blue */
+            --grad-wacv: linear-gradient(135deg, #14532d, #16a34a); /* Dark Green */
+            --grad-sig: linear-gradient(135deg, #7f1d1d, #dc2626); /* Dark Red */
             
             --radius-xl: 24px;
             --radius-lg: 16px;
@@ -65,13 +67,12 @@
             
             --badge-gray-bg: #1e293b; --badge-gray-text: #94a3b8; --badge-gray-border: #334155;
             --badge-blue-bg: #1e3a8a; --badge-blue-text: #bfdbfe; --badge-blue-border: #1d4ed8;
-            --badge-indigo-bg: #312e81; --badge-indigo-text: #c7d2fe; --badge-indigo-border: #4338ca;
             --badge-emerald-bg: #064e3b; --badge-emerald-text: #6ee7b7; --badge-emerald-border: #059669;
 
-            /* Dark Mode New Colors */
-            --badge-purple-bg: #581c87; --badge-purple-text: #e9d5ff; --badge-purple-border: #6b21a8;
-            --badge-teal-bg: #115e59; --badge-teal-text: #99f6e4; --badge-teal-border: #134e4a;
-            --badge-rose-bg: #881337; --badge-rose-text: #fecdd3; --badge-rose-border: #9f1239;
+            /* Dark Mode Specifics */
+            --badge-red-bg: #7f1d1d; --badge-red-text: #fca5a5; --badge-red-border: #991b1b;
+            --badge-purple-bg: #6b21a8; --badge-purple-text: #e879f9; --badge-purple-border: #86198f;
+            --badge-darkblue-bg: #172554; --badge-darkblue-text: #bfdbfe; --badge-darkblue-border: #1e3a8a;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; transition: all 0.25s ease; }
@@ -110,12 +111,11 @@
 
         .hero-left { position: relative; display: flex; justify-content: center;}
         .hero-img {
-            /* Modified: Narrower width and top alignment */
             width: 200px; 
             height: 220px; 
             border-radius: 28px;
             object-fit: cover; 
-            object-position: top center; /* Prevents top (head) cropping */
+            object-position: top center; 
             border: 1px solid var(--glass-border);
             box-shadow: 0 20px 40px -10px var(--primary-glow);
             background: var(--bg-body);
@@ -124,7 +124,6 @@
         .hero-right { padding-top: 5px; }
         .hero-name {
             font-family: 'Outfit', sans-serif; font-size: 3.8rem; font-weight: 800;
-            /* Modified: Increased line-height and padding to prevent clipping of 'g' */
             line-height: 1.25; 
             padding-bottom: 4px; 
             margin-bottom: 12px; 
@@ -136,9 +135,11 @@
         .hero-intro { font-size: 1.2rem; color: var(--text-sub); margin-bottom: 24px; }
         .hero-intro strong { color: var(--primary); font-weight: 700; }
         
-        /* New class for CMU Red */
         .hero-intro .cmu-red { color: #C41E3A; } 
+        /* UNIST Darker Blue class */
+        .hero-intro .text-unist { color: #002c77; }
         [data-theme="dark"] .hero-intro .cmu-red { color: #ff4d6d; }
+        [data-theme="dark"] .hero-intro .text-unist { color: #60a5fa; } /* Lighter in dark mode for visibility */
 
         .tag-container { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 24px; }
         .tag-pill {
@@ -153,13 +154,26 @@
         .social-link { font-size: 1.4rem; color: var(--text-muted); transition: all 0.2s; }
         .social-link:hover { color: var(--primary); transform: translateY(-3px); }
 
-        /* --- Section Styling --- */
+        /* --- Section Styling & Interaction --- */
         .section-header {
             display: flex; align-items: flex-end; gap: 20px; margin-bottom: 24px;
             opacity: 0; animation: slideUp 0.8s ease-out forwards 0.2s;
+            cursor: default;
         }
         .section-title { font-family: 'Outfit', sans-serif; font-size: 1.8rem; font-weight: 700; color: var(--text-main); line-height: 1; }
-        .section-line { flex-grow: 1; height: 1px; background: var(--glass-border); margin-bottom: 6px; }
+        
+        /* Interactive Divider */
+        .section-line { 
+            flex-grow: 1; height: 1px; background: var(--glass-border); margin-bottom: 6px; 
+            transform-origin: left center;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .section-header:hover .section-line {
+            height: 3px;
+            background: var(--primary);
+            box-shadow: 0 0 15px var(--primary-glow);
+        }
 
         /* --- Cards Global --- */
         .card-stack { display: flex; flex-direction: column; gap: 16px; }
@@ -183,6 +197,8 @@
             font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 0.85rem; color: white;
             padding: 3px 10px; border-radius: 6px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
+        
+        /* Updated Gradients for Conferences */
         .bg-cvpr { background: var(--grad-cvpr); }
         .bg-wacv { background: var(--grad-wacv); }
         .bg-sig { background: var(--grad-sig); }
@@ -211,6 +227,9 @@
             line-height: 1.3;
         } 
         
+        .exp-org.text-unist { color: #002c77; }
+        [data-theme="dark"] .exp-org.text-unist { color: #60a5fa; }
+
         .info-date {
             font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; font-weight: 600;
             color: var(--text-muted); background: var(--badge-gray-bg); padding: 3px 10px; border-radius: 6px;
@@ -279,23 +298,23 @@
             cursor: default; transition: all 0.2s;
         }
 
-        /* Honors: Purple/Violet */
+        /* Honors: Dark Red */
         .award-badge {
+            color: var(--badge-red-text); background: var(--badge-red-bg); border: 1px solid var(--badge-red-border);
+        }
+        .award-badge:hover { transform: translateY(-2px); box-shadow: 0 4px 6px rgba(220, 38, 38, 0.2); }
+
+        /* Scholarship: Prettier Purple */
+        .scholar-badge {
             color: var(--badge-purple-text); background: var(--badge-purple-bg); border: 1px solid var(--badge-purple-border);
         }
-        .award-badge:hover { transform: translateY(-2px); box-shadow: 0 4px 6px rgba(124, 58, 237, 0.15); }
+        .scholar-badge:hover { transform: translateY(-2px); box-shadow: 0 4px 6px rgba(147, 51, 234, 0.2); }
 
-        /* Scholarship: Teal */
-        .scholar-badge {
-            color: var(--badge-teal-text); background: var(--badge-teal-bg); border: 1px solid var(--badge-teal-border);
-        }
-        .scholar-badge:hover { transform: translateY(-2px); box-shadow: 0 4px 6px rgba(13, 148, 136, 0.15); }
-
-        /* Projects: Rose/Red/Pink */
+        /* Projects: Dark Blue */
         .proj-badge {
-            color: var(--badge-rose-text); background: var(--badge-rose-bg); border: 1px solid var(--badge-rose-border);
+            color: var(--badge-darkblue-text); background: var(--badge-darkblue-bg); border: 1px solid var(--badge-darkblue-border);
         }
-        .proj-badge:hover { transform: translateY(-2px); box-shadow: 0 4px 6px rgba(225, 29, 72, 0.15); }
+        .proj-badge:hover { transform: translateY(-2px); box-shadow: 0 4px 6px rgba(30, 58, 138, 0.2); }
 
         /* Animations */
         @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
@@ -304,7 +323,7 @@
         /* Responsive */
         @media (max-width: 768px) {
             .hero { grid-template-columns: 1fr; text-align: center; gap: 30px; justify-items: center; }
-            .hero-img { width: 220px; height: 220px; } /* Reset width for mobile if needed, or keep narrow */
+            .hero-img { width: 220px; height: 220px; } 
             .tag-container, .social-icons { justify-content: center; }
             .grid-split { grid-template-columns: 1fr; }
             .pub-header { flex-direction: column; align-items: flex-start; gap: 8px; }
@@ -330,7 +349,7 @@
             <div class="hero-right">
                 <div class="hero-name">Jaehun Bang</div>
                 <div class="hero-intro">
-                    M.S. Student at <strong>UNIST</strong><br>
+                    M.S. Student at <strong class="text-unist">UNIST</strong><br>
                     Visiting Researcher at <strong class="cmu-red">CMU</strong>
                 </div>
                 
@@ -413,7 +432,7 @@
                     <div class="exp-role">Visiting Researcher</div>
                     <div class="badge-list">
                         <span class="info-pill pill-gray"><i class="fas fa-user-tie"></i> Prof. Deva Ramanan</span>
-                        <span class="info-pill pill-indigo"><i class="fas fa-microscope"></i> 3D-LLM</span>
+                        <span class="info-pill pill-indigo"><i class="fas fa-cubes"></i> 3D-LLM</span>
                         <span class="info-pill pill-indigo"><i class="fas fa-cube"></i> 3D Scene Understanding</span>
                     </div>
                 </div>
@@ -443,13 +462,13 @@
                 
                 <div class="card">
                     <div class="exp-header">
-                        <div class="exp-org">UNIST</div>
+                        <div class="exp-org text-unist">UNIST</div>
                         <span class="info-date">Sep. 2024 - Present</span>
                     </div>
                     <div class="exp-role">M.S. in Artificial Intelligence</div>
                     <div class="badge-list">
                         <span class="info-pill pill-emerald"><i class="fas fa-star"></i> GPA: 4.3 / 4.3</span>
-                        <span class="info-pill pill-gray"><i class="fas fa-chalkboard-teacher"></i> Prof. Kyungdon Joo</span>
+                        <span class="info-pill pill-gray"><i class="fas fa-user-tie"></i> Prof. Kyungdon Joo</span>
                     </div>
                 </div>
 
@@ -461,7 +480,7 @@
                     <div class="exp-role">B.S. in Mechanical System Design Engineering</div>
                     <div class="badge-list">
                         <span class="info-pill pill-emerald"><i class="fas fa-star"></i> GPA: 4.4 / 4.5 </span>
-                        <span class="info-pill pill-emerald"><i class="fas fa-star"></i> Rank: 1/40</span>
+                        <span class="info-pill pill-emerald"><i class="fas fa-trophy"></i> Rank: 1/40</span>
                         <span class="info-pill pill-blue"><i class="fas fa-code-branch"></i> Minor: Applied AI</span>
                     </div>
                 </div>
