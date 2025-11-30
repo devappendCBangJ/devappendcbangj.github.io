@@ -20,7 +20,7 @@
             --text-muted: #64748b;
             
             /* Glass & Card Vars */
-            --glass-bg: rgba(255, 255, 255, 0.9);
+            --glass-bg: rgba(255, 255, 255, 0.95);
             --glass-border: rgba(226, 232, 240, 0.8);
             --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
             --hover-shadow: 0 20px 40px -5px rgba(0, 0, 0, 0.1);
@@ -50,7 +50,7 @@
             --text-sub: #cbd5e1;
             --text-muted: #94a3b8;
             
-            --glass-bg: rgba(15, 23, 42, 0.8);
+            --glass-bg: rgba(15, 23, 42, 0.85);
             --glass-border: rgba(255, 255, 255, 0.1);
             --card-shadow: 0 4px 20px rgba(0,0,0,0.4);
             
@@ -119,7 +119,7 @@
         .tag-container { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 24px; }
         .tag-pill {
             background: var(--glass-bg); border: 1px solid var(--glass-border);
-            color: var(--text-sub); padding: 4px 14px; border-radius: 99px; /* Slimmer Padding */
+            color: var(--text-sub); padding: 4px 14px; border-radius: 99px;
             font-size: 0.9rem; font-weight: 600; font-family: 'Outfit', sans-serif;
             box-shadow: 0 2px 4px rgba(0,0,0,0.03); cursor: default;
         }
@@ -143,7 +143,7 @@
         .card {
             background: var(--glass-bg); backdrop-filter: blur(10px);
             border: 1px solid var(--glass-border); border-radius: var(--radius-lg);
-            padding: 20px 26px; /* Optimized Padding */
+            padding: 20px 26px;
             box-shadow: var(--card-shadow);
             transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
             opacity: 0; animation: slideUp 0.8s ease-out forwards 0.3s;
@@ -176,19 +176,17 @@
         .pub-authors { font-size: 1rem; color: var(--text-sub); }
         .me { color: var(--text-main); font-weight: 700; border-bottom: 2px solid var(--primary); }
 
-        /* --- Experience & Education (Optimized Size) --- */
+        /* --- Experience & Education (Matched to Pub Title Size) --- */
         .exp-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px; }
         
-        /* Typography Fix: Smaller than Section Title, Bigger than Body */
         .exp-org { 
             font-family: 'Outfit', sans-serif; 
-            font-size: 1.45rem; 
+            font-size: 1.25rem; /* Matched to Pub Title */
             font-weight: 800; 
             color: var(--text-main); 
-            line-height: 1.2;
+            line-height: 1.3;
         } 
         
-        /* Date Badge */
         .info-date {
             font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; font-weight: 600;
             color: var(--text-muted); background: var(--badge-gray-bg); padding: 3px 10px; border-radius: 6px;
@@ -197,31 +195,27 @@
 
         .exp-role { font-size: 1.05rem; color: var(--primary); font-weight: 600; margin-bottom: 12px; }
         
-        /* Interactive Badge System */
+        /* Badge System */
         .badge-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
         
         .info-pill {
             display: inline-flex; align-items: center; gap: 8px;
             font-size: 0.9rem; font-weight: 500;
-            padding: 3px 10px; border-radius: 8px; /* Slim Padding */
+            padding: 3px 10px; border-radius: 8px;
             border: 1px solid transparent; transition: all 0.2s;
             box-shadow: 0 1px 2px rgba(0,0,0,0.03);
             cursor: default;
         }
 
-        /* Gray Badge (Advisor) */
         .pill-gray { background: var(--badge-gray-bg); color: var(--badge-gray-text); border-color: var(--badge-gray-border); }
         .pill-gray:hover { background: #e2e8f0; color: #1e293b; transform: translateY(-2px); box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
 
-        /* Blue Badge (Tech / Minor) */
         .pill-blue { background: var(--badge-blue-bg); color: var(--badge-blue-text); border-color: var(--badge-blue-border); }
         .pill-blue:hover { background: #dbeafe; transform: translateY(-2px); box-shadow: 0 4px 6px rgba(37, 99, 235, 0.1); }
 
-        /* Indigo Badge (Topics) */
         .pill-indigo { background: var(--badge-indigo-bg); color: var(--badge-indigo-text); border-color: var(--badge-indigo-border); }
         .pill-indigo:hover { background: #e0e7ff; transform: translateY(-2px); box-shadow: 0 4px 6px rgba(79, 70, 229, 0.1); }
 
-        /* Emerald Badge (GPA) */
         .pill-emerald { background: var(--badge-emerald-bg); color: var(--badge-emerald-text); border-color: var(--badge-emerald-border); }
         .pill-emerald:hover { background: #d1fae5; transform: translateY(-2px); box-shadow: 0 4px 6px rgba(5, 150, 105, 0.1); }
 
@@ -257,7 +251,7 @@
         .award-badge, .proj-badge {
             align-self: flex-start;
             font-size: 0.8rem; font-weight: 700;
-            padding: 4px 10px; border-radius: 6px; /* Slimmer */
+            padding: 4px 10px; border-radius: 6px;
             cursor: default; transition: all 0.2s;
         }
 
@@ -298,7 +292,7 @@
 
         <header class="hero">
             <div class="hero-left">
-                <img src="profile.jpg" alt="Jaehun Bang" class="hero-img">
+                <img src="jaehun.png" alt="Jaehun Bang" class="hero-img">
             </div>
             
             <div class="hero-right">
@@ -454,26 +448,26 @@
                         <div class="mini-title">Prime Minister's Award</div>
                         <span class="year-badge">2022</span>
                     </div>
-                    <div class="mini-desc">Intl. Robot Contest (Highest Honor)</div>
+                    <div class="mini-desc">International Robot Contest (Highest Honor)</div>
                     <div class="award-badge">1st Place Equivalent</div>
                 </div>
 
                 <div class="mini-card">
                     <div class="mini-head">
-                        <div class="mini-title">2nd Place (School-wide)</div>
+                        <div class="mini-title">LINC 3.0 Capstone Design</div>
                         <span class="year-badge">2024</span>
                     </div>
-                    <div class="mini-desc">LINC 3.0 Capstone Design</div>
-                    <div class="award-badge">Competition</div>
+                    <div class="mini-desc">School-wide Competition</div>
+                    <div class="award-badge">2nd Place</div>
                 </div>
 
                 <div class="mini-card">
                     <div class="mini-head">
-                        <div class="mini-title">1st Place</div>
+                        <div class="mini-title">International Robot Contest</div>
                         <span class="year-badge">2022</span>
                     </div>
-                    <div class="mini-desc">Intl. Robot Contest (Intelligent Robot Div.)</div>
-                    <div class="award-badge">Winner</div>
+                    <div class="mini-desc">Intelligent Robot Division</div>
+                    <div class="award-badge">1st Place</div>
                 </div>
 
                 <div class="mini-card">
@@ -482,7 +476,7 @@
                         <span class="year-badge">2018 - 2022</span>
                     </div>
                     <div class="mini-desc">Silla Culture & Academic Excellence</div>
-                    <div class="award-badge">Merit-based</div>
+                    <div class="award-badge">Full Scholarship</div>
                 </div>
 
             </div>
@@ -510,7 +504,7 @@
                         <span class="year-badge">2023</span>
                     </div>
                     <div class="mini-desc">UN Sustainable Development Goals.</div>
-                    <div class="proj-badge">Top 5% (of 2000 teams)</div>
+                    <div class="proj-badge">Top 5%</div>
                 </div>
                 
                 <div class="mini-card">
