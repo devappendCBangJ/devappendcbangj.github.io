@@ -19,7 +19,7 @@
             --text-sub: #334155;
             --text-muted: #64748b;
             
-            /* Natural Monotone Icon Color (Slate-500) */
+            /* Icon Color (Slate-500) */
             --icon-color: #64748b; 
             
             /* Glass & Card Vars */
@@ -106,21 +106,22 @@
 
         .hero-left { position: relative; display: flex; justify-content: center;}
         
-        /* Updated Photo Styling: No Frame, Just Shadow & Radius */
+        /* [FIXED] Photo Edges Issue 
+           Removed 'frame', 'border', 'outline'.
+           Just pure image with radius and shadow.
+        */
         .hero-img {
             width: 200px; 
             height: 220px;
-            border-radius: 28px;
+            border-radius: 28px; /* Smooth corners */
             object-fit: cover;
             object-position: top center; 
             
-            /* Removed Border and Outline entirely */
             border: none;
             outline: none;
             
-            /* Only Shadow for lift */
             box-shadow: 0 20px 40px -10px var(--primary-glow);
-            background: var(--bg-body);
+            background: var(--bg-body); /* Falls back to body color */
         }
 
         .hero-right { padding-top: 5px; }
@@ -170,7 +171,7 @@
         }
         
         .section-line { 
-            flex-grow: 1; height: 2px; 
+            flex-grow: 1; height: 1px; /* Default very thin */
             background: linear-gradient(90deg, var(--glass-border) 0%, transparent 100%); 
             margin-bottom: 6px; 
             transform-origin: left;
@@ -183,8 +184,9 @@
             color: var(--primary);
         }
         
+        /* [FIXED] Line thickness reduced */
         .section-header:hover .section-line { 
-            height: 3px;
+            height: 1.5px; /* Thinner line */
             background: linear-gradient(90deg, var(--primary) 0%, #a855f7 40%, var(--primary) 100%);
             background-size: 200% auto;
             animation: shimmer 2s linear infinite;
@@ -197,7 +199,9 @@
         /* --- Cards Global --- */
         .card-stack { display: flex; flex-direction: column; gap: 16px; }
         
-        /* Unified Card Style & Hover for All Sections */
+        /* [FIXED] Unified .card and .mini-card behavior
+           Both now have exactly the same transition, shadow, and hover transform.
+        */
         .card, .mini-card {
             background: var(--glass-bg); backdrop-filter: blur(10px);
             border: 1px solid var(--glass-border); border-radius: var(--radius-lg);
@@ -207,23 +211,12 @@
             opacity: 0; animation: slideUp 0.8s ease-out forwards 0.3s;
         }
 
-        /* Hover Effect for ALL Cards */
+        /* Both pop out equally now */
         .card:hover, .mini-card:hover {
             border-color: var(--primary); 
-            transform: translateY(-4px); 
+            transform: translateY(-5px); /* Same pop-out distance */
             box-shadow: var(--hover-shadow);
         }
-
-        /* --- Custom Icon Class for Downloaded Images --- */
-        .custom-icon {
-            width: 1.2em;
-            height: 1.2em;
-            vertical-align: middle;
-            object-fit: contain;
-            /* If you want them to be grayscale until hover, uncomment below */
-            /* filter: grayscale(100%); transition: 0.3s; */
-        }
-        /* .mini-card:hover .custom-icon { filter: grayscale(0%); } */
 
         /* --- Publications --- */
         .pub-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
@@ -300,17 +293,17 @@
             opacity: 0; animation: slideUp 0.8s ease-out forwards 0.5s;
         }
         
-        /* .mini-card now inherits basic styles from .card above */
         .mini-card {
             height: 100%; display: flex; flex-direction: column;
+            /* Inherits styles from .mini-card in .card selector above */
         }
 
         .mini-head { display: flex; justify-content: space-between; align-items: start; margin-bottom: 8px; gap: 10px; }
         
         .mini-title { font-family: 'Outfit', sans-serif; font-size: 1.2rem; font-weight: 700; color: var(--text-main); line-height: 1.25; display: flex; align-items: center; gap: 8px; }
         
-        /* Unified Natural Monotone Icon Color */
-        .mini-title i { font-size: 1.15rem; color: var(--icon-color); }
+        /* [FIXED] Reduced icon size */
+        .mini-title i { font-size: 0.95rem; color: var(--primary); }
         
         .year-badge {
             font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; font-weight: 700;
@@ -525,7 +518,7 @@
                 
                 <div class="mini-card">
                     <div class="mini-head">
-                        <div class="mini-title"><i class="fas fa-hammer"></i> International Robot Contest</div>
+                        <div class="mini-title"><i class="fas fa-hand-fist"></i> International Robot Contest</div>
                         <span class="year-badge">2022</span>
                     </div>
                     <div class="mini-desc">Autonomous Combat Robot</div>
@@ -534,7 +527,7 @@
 
                 <div class="mini-card">
                     <div class="mini-head">
-                        <div class="mini-title"><i class="fas fa-golf-ball-tee"></i> LINC 3.0 Capstone Design</div>
+                         <div class="mini-title"><i class="fas fa-flag"></i> LINC 3.0 Capstone Design</div>
                         <span class="year-badge">2024</span>
                     </div>
                     <div class="mini-desc">Autonomous Golf Caddie Robot</div>
@@ -543,7 +536,7 @@
 
                 <div class="mini-card">
                     <div class="mini-head">
-                        <div class="mini-title"><i class="fas fa-golf-ball-tee"></i> Capstone Design Achievement</div>
+                         <div class="mini-title"><i class="fas fa-flag"></i> Capstone Design Achievement</div>
                         <span class="year-badge">2024</span>
                     </div>
                     <div class="mini-desc">Autonomous Golf Caddie Robot</div>
@@ -552,7 +545,7 @@
 
                 <div class="mini-card">
                     <div class="mini-head">
-                        <div class="mini-title"><i class="fas fa-golf-ball-tee"></i> Hanium ICT Mentoring</div>
+                         <div class="mini-title"><i class="fas fa-flag"></i> Hanium ICT Mentoring</div>
                         <span class="year-badge">2024</span>
                     </div>
                     <div class="mini-desc">Autonomous Golf Caddie Robot</div>
@@ -570,7 +563,7 @@
 
                 <div class="mini-card">
                     <div class="mini-head">
-                        <div class="mini-title"><i class="fas fa-person-walking"></i> Embedded Software Contest</div>
+                        <div class="mini-title"><i class="fas fa-child-reaching"></i> Embedded Software Contest</div>
                         <span class="year-badge">2021</span>
                     </div>
                     <div class="mini-desc">Humanoid Robot</div>
