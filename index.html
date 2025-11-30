@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jaehun Bang | AI Researcher</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #ffffff;
+            --text-primary: #111111;
+            --text-secondary: #555555;
+            --accent-color: #0056b3; /* UNIST Blue tone */
+            --tag-bg: #f3f3f3;
+            --border-color: #eaeaea;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 80px 20px;
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            margin-bottom: 80px;
+        }
+
+        .hero-img {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%; /* Circular Crop */
+            object-fit: cover;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            flex-shrink: 0;
+        }
+
+        .hero-text h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 0 0 10px 0;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-text p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin: 0 0 20px 0;
+        }
+
+        .social-links a {
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 600;
+            margin-right: 20px;
+            border-bottom: 1px solid transparent;
+            transition: border-bottom 0.2s ease;
+        }
+
+        .social-links a:hover {
+            border-bottom: 1px solid var(--text-primary);
+        }
+
+        /* Section Styling */
+        section {
+            margin-bottom: 60px;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        /* List Items */
+        .item {
+            margin-bottom: 25px;
+        }
+
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+        }
+
+        .item-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-right: 10px;
+        }
+
+        .item-meta {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            font-weight: 300;
+        }
+
+        .item-desc {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-top: 5px;
+        }
+
+        /* Publication Specifics */
+        .pub-item {
+            margin-bottom: 30px;
+        }
+        
+        .pub-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        .pub-authors {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            margin: 5px 0;
+        }
+
+        .tag {
+            display: inline-block;
+            background-color: var(--tag-bg);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-right: 8px;
+        }
+        
+        .highlight {
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 600px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
+            
+            .hero-img {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .container {
+                padding: 40px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <header class="hero">
+            <img src="profile.jpg" alt="Jaehun Bang" class="hero-img">
+            
+            <div class="hero-text">
+                <h1>Jaehun Bang</h1>
+                <p>
+                    M.S. Student at UNIST<br>
+                    Visiting Researcher at Carnegie Mellon University
+                </p>
+                <div class="social-links">
+                    <a href="mailto:devappendcbangj@unist.ac.kr">Email</a>
+                    <a href="#">Google Scholar</a> <a href="#">GitHub</a> <a href="#">LinkedIn</a> </div>
+            </div>
+        </header>
+
+        <section>
+            <h2>About</h2>
+            <p>
+                I am a Master's student in Artificial Intelligence at <strong>UNIST</strong>, advised by Prof. Kyungdon Joo. 
+                Currently, I am a Visiting Researcher at <strong>Carnegie Mellon University (CMU)</strong>, working with Prof. Deva Ramanan.
+            </p>
+            <p>
+                My research interests lie at the intersection of <strong>3D-LLM, Vision-Language Models (VLM), and Vision-Language-Action (VLA)</strong> models. 
+                I am passionate about building systems that can understand and interact with open-vocabulary 3D scenes.
+            </p>
+        </section>
+
+        <section>
+            <h2>Selected Publications</h2>
+            
+            <div class="pub-item">
+                <div class="pub-title">LightSplat: Fast and Memory-Efficient Open-Vocabulary 3D Scene Understanding in Five Seconds</div>
+                <div class="pub-authors">
+                    <strong>Jaehun Bang</strong>, Jinhyeok Kim, Minji Kim, Seungheon Jeong, Kyungdon Joo
+                </div>
+                <div>
+                    <span class="tag highlight">Under Review @ CVPR 2026</span>
+                </div>
+            </div>
+
+            <div class="pub-item">
+                <div class="pub-title">Beyond the Highlights: Video Retrieval with Salient and Surrounding Contexts</div>
+                <div class="pub-authors">
+                    <strong>Jaehun Bang</strong>, Moon Ye-Bin, Tae-Hyun Oh, Kyungdon Joo
+                </div>
+                <div>
+                    <span class="tag">WACV 2026</span>
+                </div>
+            </div>
+
+            <div class="pub-item">
+                <div class="pub-title">Rigidity-Aware 3D Gaussian Deformation from a Single Image</div>
+                <div class="pub-authors">
+                    Jinhyeok Kim, <strong>Jaehun Bang</strong>, Seunghyun Seo, Kyungdon Joo
+                </div>
+                <div>
+                    <span class="tag">SIGGRAPH ASIA 2025</span>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Education</h2>
+            
+            <div class="item">
+                <div class="item-header">
+                    <span class="item-title">Ulsan National Institute of Science and Technology (UNIST)</span>
+                    <span class="item-meta">Sep. 2024 - Present</span>
+                </div>
+                <div class="item-desc">M.S. in Artificial Intelligence (Advisor: Prof. Kyungdon Joo)</div>
+            </div>
+
+            <div class="item">
+                <div class="item-header">
+                    <span class="item-title">Seoul National University of Science and Technology (SEOULTECH)</span>
+                    <span class="item-meta">Mar. 2018 - Aug. 2024</span>
+                </div>
+                <div class="item-desc">
+                    B.S. in Mechanical System Design Engineering<br>
+                    Minor in Applied Artificial Intelligence<br>
+                    GPA: 4.4/4.5 (Rank: 1/40)
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Experience</h2>
+
+            <div class="item">
+                <div class="item-header">
+                    <span class="item-title">Carnegie Mellon University (CMU)</span>
+                    <span class="item-meta">Aug. 2025 - Present</span>
+                </div>
+                <div class="item-desc">
+                    <strong>Visiting Researcher</strong> (Advisor: Prof. Deva Ramanan)<br>
+                    Topic: 3D-LLM, Open-Vocabulary 3D Scene Understanding
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="item-header">
+                    <span class="item-title">POSTECH</span>
+                    <span class="item-meta">Jan. 2024 - Aug. 2024</span>
+                </div>
+                <div class="item-desc">
+                    <strong>Research Intern</strong> (Advisor: Prof. Tae-Hyun Oh)<br>
+                    Topic: Video-LLM, Vision-Language Model
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Selected Honors & Awards</h2>
+            
+            <div class="item">
+                <div class="item-header">
+                    <span class="item-title">Prime Minister's Award</span>
+                    <span class="item-meta">2022</span>
+                </div>
+                <div class="item-desc">International Robot Contest Intelligent Robot Division</div>
+            </div>
+
+             <div class="item">
+                <div class="item-header">
+                    <span class="item-title">2nd Place (School-wide)</span>
+                    <span class="item-meta">2024</span>
+                </div>
+                <div class="item-desc">LINC 3.0 Competition</div>
+            </div>
+
+            <div class="item">
+                <div class="item-header">
+                    <span class="item-title">1st Place</span>
+                    <span class="item-meta">2022</span>
+                </div>
+                <div class="item-desc">International Robot Contest Intelligent Robot Division</div>
+            </div>
+            
+             <div class="item">
+                <div class="item-header">
+                    <span class="item-title">Full-Ride Scholarship</span>
+                    <span class="item-meta">2018 - 2023</span>
+                </div>
+                <div class="item-desc">Silla Culture Scholarship & Academic Excellence Scholarship</div>
+            </div>
+        </section>
+
+        <footer style="text-align: center; color: #999; font-size: 0.8rem; margin-top: 80px;">
+            &copy; 2025 Jaehun Bang. All rights reserved.
+        </footer>
+    </div>
+
+</body>
+</html>
