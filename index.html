@@ -13,44 +13,29 @@
 
     <style>
         :root {
-            /* Palette */
             --bg-body: #f8fafc;
             --text-main: #0f172a;
             --text-sub: #334155;
             --text-muted: #64748b;
-            
-            /* [NEW] Deep Navy for Roles/Descriptions */
             --text-deep-navy: #172554; 
-            
-            /* Icon Color: Nearly Black */
             --icon-color: #1e293b; 
-            
-            /* Glass & Card Vars */
             --glass-bg: rgba(255, 255, 255, 0.95);
             --glass-border: rgba(226, 232, 240, 0.8);
             --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
             --hover-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.08);
-
             --primary: #2563eb;
             --primary-glow: rgba(37, 99, 235, 0.3);
-            
-            /* --- BADGE COLORS --- */
             --badge-gray-bg: #f1f5f9; --badge-gray-text: #475569; --badge-gray-border: #cbd5e1;
             --badge-emerald-bg: #ecfdf5; --badge-emerald-text: #047857; --badge-emerald-border: #6ee7b7;
             --badge-red-bg: #fef2f2; --badge-red-text: #991b1b; --badge-red-border: #fca5a5;
             --badge-navy-bg: #dbeafe; --badge-navy-text: #172554; --badge-navy-border: #93c5fd;
             --badge-indigo-bg: #e0e7ff; --badge-indigo-text: #312e81; --badge-indigo-border: #a5b4fc;
             --badge-gold-bg: #fffbeb; --badge-gold-text: #b45309; --badge-gold-border: #fcd34d;
-            
-            /* Conference Gradients */
             --grad-cvpr: linear-gradient(135deg, #003366, #0056b3);
             --grad-wacv: linear-gradient(135deg, #14532d, #16a34a);
             --grad-sig: linear-gradient(135deg, #7f1d1d, #dc2626);
-            
             --radius-xl: 24px;
             --radius-lg: 16px;
-            
-            /* Section Icon Color -> Text Main (Black/Dark Blue) */
             --section-icon-color: var(--text-main);
         }
 
@@ -59,27 +44,20 @@
             --text-main: #f8fafc;
             --text-sub: #cbd5e1;
             --text-muted: #94a3b8;
-            
-            /* In dark mode, "Deep Navy" must be lighter to be visible */
             --text-deep-navy: #cbd5e1; 
-            
             --icon-color: #e2e8f0; 
             --glass-bg: rgba(15, 23, 42, 0.85);
             --glass-border: rgba(255, 255, 255, 0.1);
             --card-shadow: 0 4px 20px rgba(0,0,0,0.4);
             --hover-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
-            
             --primary: #60a5fa;
             --primary-glow: rgba(96, 165, 250, 0.3);
-            
             --badge-gray-bg: #1e293b; --badge-gray-text: #94a3b8; --badge-gray-border: #475569;
             --badge-emerald-bg: #064e3b; --badge-emerald-text: #6ee7b7; --badge-emerald-border: #059669;
             --badge-red-bg: #7f1d1d; --badge-red-text: #fca5a5; --badge-red-border: #b91c1c;
             --badge-navy-bg: #1e3a8a; --badge-navy-text: #dbeafe; --badge-navy-border: #2563eb;
             --badge-indigo-bg: #312e81; --badge-indigo-text: #c7d2fe; --badge-indigo-border: #4f46e5;
             --badge-gold-bg: #78350f; --badge-gold-text: #fcd34d; --badge-gold-border: #b45309;
-            
-            /* Dark Mode Section Icon -> White/Light Text */
             --section-icon-color: var(--text-main);
         }
 
@@ -110,12 +88,9 @@
         }
         .theme-btn:hover { border-color: var(--primary); color: var(--primary); }
 
-        /* --- Hero Section (Updated for larger image and tighter spacing) --- */
         .hero {
             display: grid; 
-            /* Increased the first column width to accommodate the larger image */
             grid-template-columns: 300px 1fr; 
-            /* Reduced the gap to bring text closer */
             gap: 30px; 
             align-items: center;
             margin-bottom: 90px; animation: slideUp 0.8s ease-out forwards;
@@ -123,10 +98,9 @@
 
         .hero-left { position: relative; display: flex; justify-content: center;}
         
-        /* Updated Image Size */
         .hero-img {
-            width: 280px;  /* Increased width */
-            height: 300px; /* Increased height */
+            width: 280px; 
+            height: 300px; 
             border-radius: 28px; 
             object-fit: cover;
             object-position: top center; 
@@ -136,7 +110,12 @@
             background: transparent;
         }
 
-        .hero-right { padding-top: 5px; }
+        /* [CHANGED] Right Alignment for Hero Content */
+        .hero-right { 
+            padding-top: 5px; 
+            text-align: right; /* Align text to the right */
+        }
+
         .hero-name {
             font-family: 'Outfit', sans-serif; font-size: 3.8rem; font-weight: 800;
             line-height: 1.25; 
@@ -160,7 +139,12 @@
             color: var(--text-muted); margin-bottom: 8px; display: block;
         }
 
-        .tag-container { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 24px; }
+        /* [CHANGED] Flex End for Right Alignment */
+        .tag-container { 
+            display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 24px; 
+            justify-content: flex-end; /* Tags align to right */
+        }
+
         .tag-pill {
             background: var(--glass-bg); 
             border: 1px solid var(--badge-gray-border);
@@ -172,9 +156,13 @@
         }
         .tag-pill:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); }
 
-        .social-icons { display: flex; gap: 16px; }
+        /* [CHANGED] Flex End for Right Alignment */
+        .social-icons { 
+            display: flex; gap: 16px; 
+            justify-content: flex-end; /* Icons align to right */
+        }
         .social-link { font-size: 1.4rem; color: var(--text-muted); transition: all 0.2s; }
-        .social-link:hover { color: var(--primary); transform: translateY(-2px); }
+        .social-link:hover { color: var(--primary); transform: translateY(-3px); }
 
         /* --- Section Interaction --- */
         .section-header {
@@ -185,7 +173,6 @@
         
         .section-title-wrapper { display: flex; align-items: center; gap: 12px; }
 
-        /* Section Icon Color (Default Black/Dark) */
         .section-icon {
             font-size: 1.8rem; color: var(--section-icon-color); transition: color 0.3s ease;
         }
@@ -399,10 +386,13 @@
         @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.4); } 70% { box-shadow: 0 0 0 6px rgba(245, 158, 11, 0); } 100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); } }
 
         @media (max-width: 768px) {
+            /* On mobile, reset to center alignment */
             .hero { grid-template-columns: 1fr; text-align: center; gap: 30px; justify-items: center; }
-            /* Restore smaller image size on mobile */
+            .hero-right { text-align: center; } /* Reset text align */
+            .tag-container, .social-icons { justify-content: center; } /* Reset flex align */
+            
             .hero-img { width: 220px; height: 220px; } 
-            .tag-container, .social-icons { justify-content: center; }
+            
             .grid-split { grid-template-columns: 1fr; }
             .pub-header { flex-direction: column; align-items: flex-start; gap: 8px; }
             .exp-header { flex-direction: column; align-items: flex-start; gap: 4px; }
@@ -733,4 +723,3 @@
     </script>
 </body>
 </html>
-
