@@ -4,170 +4,232 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jaehun Bang | AI Researcher</title>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
         :root {
-            --bg-color: #ffffff;
-            --text-primary: #111111;
-            --text-secondary: #555555;
-            --accent-color: #0056b3; /* UNIST Blue tone */
-            --tag-bg: #f3f3f3;
-            --border-color: #eaeaea;
+            /* Light Theme Variables */
+            --bg-body: #f8f9fa;
+            --bg-card: #ffffff;
+            --text-main: #1a1a1a;
+            --text-sub: #666666;
+            --accent: #2563eb; /* Royal Blue */
+            --border: #e5e7eb;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            --shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --tag-bg: #eff6ff;
+            --tag-text: #2563eb;
         }
 
+        [data-theme="dark"] {
+            /* Dark Theme Variables */
+            --bg-body: #0f172a;
+            --bg-card: #1e293b;
+            --text-main: #f1f5f9;
+            --text-sub: #94a3b8;
+            --accent: #60a5fa;
+            --border: #334155;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+            --shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
+            --tag-bg: #1e3a8a;
+            --tag-text: #93c5fd;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; transition: background-color 0.3s ease, color 0.3s ease; }
+        
         body {
             font-family: 'Inter', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
             line-height: 1.6;
-            color: var(--text-primary);
-            background-color: var(--bg-color);
-            margin: 0;
-            padding: 0;
         }
 
+        /* Layout */
         .container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
-            padding: 80px 20px;
+            padding: 60px 20px;
         }
+
+        /* Navbar / Dark Mode Toggle */
+        .nav-bar {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 40px;
+        }
+        
+        .theme-toggle {
+            background: none;
+            border: 2px solid var(--border);
+            color: var(--text-main);
+            padding: 8px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .theme-toggle:hover { background-color: var(--border); }
 
         /* Hero Section */
         .hero {
             display: flex;
             align-items: center;
-            gap: 40px;
+            gap: 50px;
             margin-bottom: 80px;
+            animation: fadeIn 0.8s ease-out;
         }
 
         .hero-img {
             width: 180px;
             height: 180px;
-            border-radius: 50%; /* Circular Crop */
+            border-radius: 24px; /* Squircle */
             object-fit: cover;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            flex-shrink: 0;
+            box-shadow: var(--shadow-hover);
+            border: 4px solid var(--bg-card);
         }
 
         .hero-text h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin: 0 0 10px 0;
-            letter-spacing: -0.02em;
+            font-size: 2.8rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, var(--text-main) 0%, var(--text-sub) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .hero-text p {
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-            margin: 0 0 20px 0;
+        .hero-role {
+            font-size: 1.2rem;
+            color: var(--text-sub);
+            margin-bottom: 24px;
+            font-weight: 500;
         }
 
-        .social-links a {
+        .social-links { display: flex; gap: 15px; }
+        .social-btn {
             text-decoration: none;
-            color: var(--text-primary);
-            font-weight: 600;
-            margin-right: 20px;
-            border-bottom: 1px solid transparent;
-            transition: border-bottom 0.2s ease;
+            color: var(--text-sub);
+            font-size: 1.2rem;
+            padding: 10px;
+            border-radius: 12px;
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            transition: all 0.2s ease;
+        }
+        .social-btn:hover {
+            color: var(--accent);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
         }
 
-        .social-links a:hover {
-            border-bottom: 1px solid var(--text-primary);
-        }
-
-        /* Section Styling */
-        section {
-            margin-bottom: 60px;
-        }
-
-        h2 {
-            font-size: 1.5rem;
-            border-bottom: 2px solid var(--border-color);
-            padding-bottom: 10px;
+        /* Sections */
+        section { margin-bottom: 80px; animation: slideUp 0.8s ease-out; }
+        
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
             margin-bottom: 30px;
-            font-weight: 600;
-        }
-
-        /* List Items */
-        .item {
-            margin-bottom: 25px;
-        }
-
-        .item-header {
             display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px;
+        }
+        .section-title::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background-color: var(--border);
+            margin-left: 20px;
         }
 
-        .item-title {
-            font-weight: 600;
-            font-size: 1.1rem;
-            margin-right: 10px;
+        /* Cards Style (Publications, Exp) */
+        .card-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
         }
 
-        .item-meta {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            font-weight: 300;
+        .card {
+            background-color: var(--bg-card);
+            padding: 24px;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            position: relative;
+            overflow: hidden;
         }
 
-        .item-desc {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            margin-top: 5px;
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--accent);
         }
 
         /* Publication Specifics */
-        .pub-item {
-            margin-bottom: 30px;
+        .pub-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--text-main);
         }
         
-        .pub-title {
-            font-weight: 700;
-            font-size: 1.1rem;
-            color: var(--text-primary);
-            text-decoration: none;
-        }
-
         .pub-authors {
             font-size: 0.95rem;
-            color: var(--text-secondary);
-            margin: 5px 0;
+            color: var(--text-sub);
+            margin-bottom: 12px;
         }
 
-        .tag {
-            display: inline-block;
-            background-color: var(--tag-bg);
-            padding: 2px 8px;
-            border-radius: 4px;
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 4px 10px;
+            border-radius: 6px;
             font-size: 0.8rem;
             font-weight: 600;
-            color: var(--text-secondary);
-            margin-right: 8px;
+            font-family: 'JetBrains Mono', monospace;
+            background-color: var(--tag-bg);
+            color: var(--tag-text);
         }
         
-        .highlight {
-            color: var(--accent-color);
-            font-weight: 600;
+        .badge.highlight {
+            background-color: rgba(239, 68, 68, 0.1);
+            color: #ef4444; /* Red for emphasis */
         }
 
-        /* Mobile Responsiveness */
-        @media (max-width: 600px) {
-            .hero {
-                flex-direction: column;
-                text-align: center;
-                gap: 20px;
-            }
-            
-            .hero-img {
-                width: 150px;
-                height: 150px;
-            }
-            
-            .container {
-                padding: 40px 20px;
-            }
+        /* Experience Items */
+        .exp-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 8px;
+        }
+        
+        .exp-org { font-size: 1.1rem; font-weight: 700; }
+        .exp-date { font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--text-sub); }
+        .exp-role { color: var(--accent); font-weight: 600; margin-bottom: 4px; }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .hero { flex-direction: column; text-align: center; }
+            .hero-img { width: 150px; height: 150px; }
+            .exp-header { flex-direction: column; gap: 5px; }
+            .nav-bar { justify-content: center; }
         }
     </style>
 </head>
@@ -175,157 +237,173 @@
 
     <div class="container">
         
+        <nav class="nav-bar">
+            <button class="theme-toggle" onclick="toggleTheme()">
+                <i class="fas fa-moon"></i> <span>Dark Mode</span>
+            </button>
+        </nav>
+
         <header class="hero">
             <img src="profile.jpg" alt="Jaehun Bang" class="hero-img">
             
             <div class="hero-text">
                 <h1>Jaehun Bang</h1>
-                <p>
-                    M.S. Student at UNIST<br>
-                    Visiting Researcher at Carnegie Mellon University
+                <div class="hero-role">
+                    M.S. Student at <span style="color:var(--accent)">UNIST</span><br>
+                    Visiting Researcher at <span style="color:var(--accent)">CMU</span>
+                </div>
+                <p style="color: var(--text-sub); margin-bottom: 20px; max-width: 500px;">
+                    I am interested in <strong>3D-LLM, Vision-Language Models (VLM)</strong>, and <strong>3D Gaussian Splatting</strong>. I aim to build systems that understand open-vocabulary 3D scenes.
                 </p>
+                
                 <div class="social-links">
-                    <a href="mailto:devappendcbangj@unist.ac.kr">Email</a>
-                    <a href="#">Google Scholar</a> <a href="#">GitHub</a> <a href="#">LinkedIn</a> </div>
+                    <a href="mailto:devappendcbangj@unist.ac.kr" class="social-btn" title="Email"><i class="fas fa-envelope"></i></a>
+                    <a href="#" class="social-btn" title="Google Scholar"><i class="fas fa-graduation-cap"></i></a>
+                    <a href="#" class="social-btn" title="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="#" class="social-btn" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                </div>
             </div>
         </header>
 
         <section>
-            <h2>About</h2>
-            <p>
-                I am a Master's student in Artificial Intelligence at <strong>UNIST</strong>, advised by Prof. Kyungdon Joo. 
-                Currently, I am a Visiting Researcher at <strong>Carnegie Mellon University (CMU)</strong>, working with Prof. Deva Ramanan.
-            </p>
-            <p>
-                My research interests lie at the intersection of <strong>3D-LLM, Vision-Language Models (VLM), and Vision-Language-Action (VLA)</strong> models. 
-                I am passionate about building systems that can understand and interact with open-vocabulary 3D scenes.
-            </p>
-        </section>
+            <h2 class="section-title">Selected Publications</h2>
+            <div class="card-grid">
+                
+                <div class="card">
+                    <div class="pub-title">LightSplat: Fast and Memory-Efficient Open-Vocabulary 3D Scene Understanding in Five Seconds</div>
+                    <div class="pub-authors">
+                        <strong>Jaehun Bang</strong>, Jinhyeok Kim, Minji Kim, Seungheon Jeong, Kyungdon Joo
+                    </div>
+                    <div>
+                        <span class="badge highlight">Under Review @ CVPR 2026</span>
+                    </div>
+                </div>
 
-        <section>
-            <h2>Selected Publications</h2>
-            
-            <div class="pub-item">
-                <div class="pub-title">LightSplat: Fast and Memory-Efficient Open-Vocabulary 3D Scene Understanding in Five Seconds</div>
-                <div class="pub-authors">
-                    <strong>Jaehun Bang</strong>, Jinhyeok Kim, Minji Kim, Seungheon Jeong, Kyungdon Joo
+                <div class="card">
+                    <div class="pub-title">Beyond the Highlights: Video Retrieval with Salient and Surrounding Contexts</div>
+                    <div class="pub-authors">
+                        <strong>Jaehun Bang</strong>, Moon Ye-Bin, Tae-Hyun Oh, Kyungdon Joo
+                    </div>
+                    <div>
+                        <span class="badge">WACV 2026</span>
+                    </div>
                 </div>
-                <div>
-                    <span class="tag highlight">Under Review @ CVPR 2026</span>
-                </div>
-            </div>
 
-            <div class="pub-item">
-                <div class="pub-title">Beyond the Highlights: Video Retrieval with Salient and Surrounding Contexts</div>
-                <div class="pub-authors">
-                    <strong>Jaehun Bang</strong>, Moon Ye-Bin, Tae-Hyun Oh, Kyungdon Joo
+                <div class="card">
+                    <div class="pub-title">Rigidity-Aware 3D Gaussian Deformation from a Single Image</div>
+                    <div class="pub-authors">
+                        Jinhyeok Kim, <strong>Jaehun Bang</strong>, Seunghyun Seo, Kyungdon Joo
+                    </div>
+                    <div>
+                        <span class="badge">SIGGRAPH ASIA 2025</span>
+                    </div>
                 </div>
-                <div>
-                    <span class="tag">WACV 2026</span>
-                </div>
-            </div>
 
-            <div class="pub-item">
-                <div class="pub-title">Rigidity-Aware 3D Gaussian Deformation from a Single Image</div>
-                <div class="pub-authors">
-                    Jinhyeok Kim, <strong>Jaehun Bang</strong>, Seunghyun Seo, Kyungdon Joo
-                </div>
-                <div>
-                    <span class="tag">SIGGRAPH ASIA 2025</span>
-                </div>
             </div>
         </section>
 
         <section>
-            <h2>Education</h2>
-            
-            <div class="item">
-                <div class="item-header">
-                    <span class="item-title">Ulsan National Institute of Science and Technology (UNIST)</span>
-                    <span class="item-meta">Sep. 2024 - Present</span>
+            <h2 class="section-title">Experience</h2>
+            <div class="card-grid">
+                
+                <div class="card">
+                    <div class="exp-header">
+                        <span class="exp-org">Carnegie Mellon University (CMU)</span>
+                        <span class="exp-date">Aug. 2025 - Present</span>
+                    </div>
+                    <div class="exp-role">Visiting Researcher (Advised by Prof. Deva Ramanan)</div>
+                    <div style="font-size: 0.95rem; color: var(--text-sub);">
+                        Focusing on 3D-LLM and Open-Vocabulary 3D Scene Understanding.
+                    </div>
                 </div>
-                <div class="item-desc">M.S. in Artificial Intelligence (Advisor: Prof. Kyungdon Joo)</div>
-            </div>
 
-            <div class="item">
-                <div class="item-header">
-                    <span class="item-title">Seoul National University of Science and Technology (SEOULTECH)</span>
-                    <span class="item-meta">Mar. 2018 - Aug. 2024</span>
+                <div class="card">
+                    <div class="exp-header">
+                        <span class="exp-org">POSTECH</span>
+                        <span class="exp-date">Jan. 2024 - Aug. 2024</span>
+                    </div>
+                    <div class="exp-role">Research Intern (Advised by Prof. Tae-Hyun Oh)</div>
+                    <div style="font-size: 0.95rem; color: var(--text-sub);">
+                        Researched on Video-LLM and Vision-Language Models.
+                    </div>
                 </div>
-                <div class="item-desc">
-                    B.S. in Mechanical System Design Engineering<br>
-                    Minor in Applied Artificial Intelligence<br>
-                    GPA: 4.4/4.5 (Rank: 1/40)
-                </div>
-            </div>
-        </section>
 
-        <section>
-            <h2>Experience</h2>
-
-            <div class="item">
-                <div class="item-header">
-                    <span class="item-title">Carnegie Mellon University (CMU)</span>
-                    <span class="item-meta">Aug. 2025 - Present</span>
-                </div>
-                <div class="item-desc">
-                    <strong>Visiting Researcher</strong> (Advisor: Prof. Deva Ramanan)<br>
-                    Topic: 3D-LLM, Open-Vocabulary 3D Scene Understanding
-                </div>
-            </div>
-
-            <div class="item">
-                <div class="item-header">
-                    <span class="item-title">POSTECH</span>
-                    <span class="item-meta">Jan. 2024 - Aug. 2024</span>
-                </div>
-                <div class="item-desc">
-                    <strong>Research Intern</strong> (Advisor: Prof. Tae-Hyun Oh)<br>
-                    Topic: Video-LLM, Vision-Language Model
-                </div>
             </div>
         </section>
 
         <section>
-            <h2>Selected Honors & Awards</h2>
-            
-            <div class="item">
-                <div class="item-header">
-                    <span class="item-title">Prime Minister's Award</span>
-                    <span class="item-meta">2022</span>
+            <h2 class="section-title">Education</h2>
+            <div class="card-grid">
+                
+                <div class="card">
+                    <div class="exp-header">
+                        <span class="exp-org">UNIST</span>
+                        <span class="exp-date">Sep. 2024 - Present</span>
+                    </div>
+                    <div class="exp-role">M.S. in Artificial Intelligence</div>
+                    <div style="font-size: 0.95rem; color: var(--text-sub);">
+                        Advisor: Prof. Kyungdon Joo
+                    </div>
                 </div>
-                <div class="item-desc">International Robot Contest Intelligent Robot Division</div>
-            </div>
 
-             <div class="item">
-                <div class="item-header">
-                    <span class="item-title">2nd Place (School-wide)</span>
-                    <span class="item-meta">2024</span>
+                <div class="card">
+                    <div class="exp-header">
+                        <span class="exp-org">Seoul National University of Science and Technology</span>
+                        <span class="exp-date">Mar. 2018 - Aug. 2024</span>
+                    </div>
+                    <div class="exp-role">B.S. in Mechanical System Design Engineering</div>
+                    <div style="font-size: 0.95rem; color: var(--text-sub);">
+                        GPA: 4.4/4.5 (Ranked 1st in dept.) [cite: 11]
+                    </div>
                 </div>
-                <div class="item-desc">LINC 3.0 Competition</div>
-            </div>
 
-            <div class="item">
-                <div class="item-header">
-                    <span class="item-title">1st Place</span>
-                    <span class="item-meta">2022</span>
-                </div>
-                <div class="item-desc">International Robot Contest Intelligent Robot Division</div>
-            </div>
-            
-             <div class="item">
-                <div class="item-header">
-                    <span class="item-title">Full-Ride Scholarship</span>
-                    <span class="item-meta">2018 - 2023</span>
-                </div>
-                <div class="item-desc">Silla Culture Scholarship & Academic Excellence Scholarship</div>
             </div>
         </section>
 
-        <footer style="text-align: center; color: #999; font-size: 0.8rem; margin-top: 80px;">
-            &copy; 2025 Jaehun Bang. All rights reserved.
+        <section>
+            <h2 class="section-title">Honors & Awards</h2>
+            <div class="card-grid">
+                <div class="card" style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <div style="font-weight: 700;">Prime Minister's Award</div>
+                        <div style="font-size: 0.9rem; color: var(--text-sub);">Intl. Robot Contest Intelligent Robot Div.</div>
+                    </div>
+                    <span class="badge">2022</span>
+                </div>
+
+                 <div class="card" style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <div style="font-weight: 700;">2nd Place (School-wide)</div>
+                        <div style="font-size: 0.9rem; color: var(--text-sub);">LINC 3.0 Competition</div>
+                    </div>
+                    <span class="badge">2024</span>
+                </div>
+            </div>
+        </section>
+
+        <footer style="text-align: center; padding-top: 40px; color: var(--text-sub); font-size: 0.85rem;">
+            &copy; 2025 Jaehun Bang. Built with simple HTML & CSS.
         </footer>
     </div>
 
+    <script>
+        function toggleTheme() {
+            const body = document.body;
+            const btnIcon = document.querySelector('.theme-toggle i');
+            const btnText = document.querySelector('.theme-toggle span');
+            
+            if (body.getAttribute('data-theme') === 'dark') {
+                body.removeAttribute('data-theme');
+                btnIcon.classList.remove('fa-sun');
+                btnIcon.classList.add('fa-moon');
+                btnText.innerText = "Dark Mode";
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                btnIcon.classList.remove('fa-moon');
+                btnIcon.classList.add('fa-sun');
+                btnText.innerText = "Light Mode";
+            }
+        }
+    </script>
 </body>
 </html>
