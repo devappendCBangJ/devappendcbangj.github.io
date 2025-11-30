@@ -23,18 +23,18 @@
             /* Icon Color */
             --icon-color: #1e293b; 
             
-            /* Theme Colors */
-            --col-pub: #0f172a;      
-            --col-exp: #7e22ce;      
-            --col-edu: #0f766e;      
-            --col-honor: #b91c1c;    
-            --col-proj: #172554;     
+            /* --- SECTION THEME COLORS (Light Mode) --- */
+            --col-pub: #0f172a;      /* Black/Dark Slate */
+            --col-exp: #7e22ce;      /* Deep Purple */
+            --col-edu: #0f766e;      /* Deep Teal */
+            --col-honor: #b91c1c;    /* Dark Red */
+            --col-proj: #172554;     /* Dark Navy */
 
             /* Glass & Card Vars */
             --glass-bg: rgba(255, 255, 255, 0.98);
             --glass-border: rgba(226, 232, 240, 0.8);
             --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-            --hover-shadow: 0 20px 40px -5px rgba(0, 0, 0, 0.12);
+            --hover-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.08);
 
             --primary: #2563eb;
             --primary-glow: rgba(37, 99, 235, 0.25);
@@ -64,7 +64,12 @@
             --text-deep-navy: #cbd5e1; 
             --icon-color: #e2e8f0; 
             
-            --col-pub: #f8fafc; --col-exp: #a855f7; --col-edu: #2dd4bf; --col-honor: #f87171; --col-proj: #60a5fa;     
+            /* --- SECTION THEME COLORS (Dark Mode) --- */
+            --col-pub: #f8fafc;      /* White */
+            --col-exp: #a855f7;      /* Bright Purple */
+            --col-edu: #2dd4bf;      /* Bright Teal */
+            --col-honor: #f87171;    /* Bright Red */
+            --col-proj: #60a5fa;     /* Bright Blue */
 
             --glass-bg: rgba(15, 23, 42, 0.9);
             --glass-border: rgba(255, 255, 255, 0.1);
@@ -84,13 +89,20 @@
             --section-icon-color: var(--text-main);
         }
 
+        /* --- Section Theme Scoping --- */
+        /* Assign variable based on section class */
+        .section-pub { --theme-col: var(--col-pub); }
+        .section-exp { --theme-col: var(--col-exp); }
+        .section-edu { --theme-col: var(--col-edu); }
+        .section-honor { --theme-col: var(--col-honor); }
+        .section-proj { --theme-col: var(--col-proj); }
+
         * { margin: 0; padding: 0; box-sizing: border-box; transition: all 0.25s ease; }
         
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--bg-body);
             color: var(--text-main);
-            /* [CHANGED] Tighter line height */
             line-height: 1.45; 
             overflow-x: hidden;
             background-image: radial-gradient(circle at 50% 0%, rgba(37, 99, 235, 0.05), transparent 70%);
@@ -99,11 +111,9 @@
         .container {
             max-width: 980px;
             margin: 0 auto;
-            /* [CHANGED] Reduced container padding */
             padding: 30px 24px 80px; 
         }
 
-        /* [CHANGED] Reduced margin */
         .nav-bar { display: flex; justify-content: flex-end; margin-bottom: 20px; }
         
         .theme-btn {
@@ -116,13 +126,12 @@
         }
         .theme-btn:hover { border-color: var(--primary); color: var(--primary); }
 
-        /* --- Hero Section: Compact --- */
+        /* --- Hero Section --- */
         .hero {
             display: grid; 
             grid-template-columns: 260px 1fr;
             gap: 40px; 
             align-items: center;
-            /* [CHANGED] Reduced bottom margin */
             margin-bottom: 50px; 
             animation: slideUp 0.8s ease-out forwards;
         }
@@ -145,14 +154,12 @@
         .hero-name {
             font-family: 'Outfit', sans-serif; font-size: 3.5rem; font-weight: 800;
             line-height: 1.1; 
-            /* [CHANGED] Reduced margins */
             margin-bottom: 8px; 
             letter-spacing: -0.02em;
             background: linear-gradient(135deg, var(--text-main) 20%, var(--primary) 100%);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
 
-        /* [CHANGED] Reduced margins */
         .hero-intro { font-size: 1.15rem; color: var(--text-sub); margin-bottom: 20px; }
         .hero-intro strong { color: var(--primary); font-weight: 700; }
         
@@ -166,7 +173,6 @@
             color: var(--text-muted); margin-bottom: 6px; display: block;
         }
 
-        /* [CHANGED] Reduced margins */
         .tag-container { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; justify-content: flex-start; }
         
         .tag-pill {
@@ -187,7 +193,6 @@
         /* --- Section Interaction --- */
         .section-header {
             display: flex; align-items: flex-end; gap: 16px; 
-            /* [CHANGED] Reduced bottom margin */
             margin-bottom: 16px;
             opacity: 0; animation: slideUp 0.8s ease-out forwards 0.2s;
             cursor: default;
@@ -210,65 +215,55 @@
             position: relative; overflow: hidden;
         }
 
-        /* [CHANGED] Section Margins via Class */
-        .main-section {
-            margin-top: 50px; /* Reduced from 80px */
-        }
+        .main-section { margin-top: 50px; }
 
-        /* Hover Colors Logic */
-        .header-pub:hover .section-icon, .header-pub:hover .section-title { color: var(--col-pub); }
-        .header-pub:hover .section-line { 
-            height: 2px; background: linear-gradient(90deg, var(--col-pub) 0%, #94a3b8 50%, var(--col-pub) 100%);
-            background-size: 200% auto; animation: shimmer-smooth 1.5s linear infinite;
+        /* [UPDATED] Unified Section Hover Logic using variables */
+        /* Changes Title, Icon, and Line color based on the parent section's --theme-col */
+        .section-header:hover .section-icon, 
+        .section-header:hover .section-title { 
+            color: var(--theme-col); 
         }
-
-        .header-exp:hover .section-icon, .header-exp:hover .section-title { color: var(--col-exp); }
-        .header-exp:hover .section-line { 
-            height: 2px; background: linear-gradient(90deg, var(--col-exp) 0%, #e879f9 50%, var(--col-exp) 100%);
-            background-size: 200% auto; animation: shimmer-smooth 1.5s linear infinite;
-        }
-
-        .header-edu:hover .section-icon, .header-edu:hover .section-title { color: var(--col-edu); }
-        .header-edu:hover .section-line { 
-            height: 2px; background: linear-gradient(90deg, var(--col-edu) 0%, #5eead4 50%, var(--col-edu) 100%);
-            background-size: 200% auto; animation: shimmer-smooth 1.5s linear infinite;
-        }
-
-        .header-honor:hover .section-icon, .header-honor:hover .section-title { color: var(--col-honor); }
-        .header-honor:hover .section-line { 
-            height: 2px; background: linear-gradient(90deg, var(--col-honor) 0%, #fca5a5 50%, var(--col-honor) 100%);
-            background-size: 200% auto; animation: shimmer-smooth 1.5s linear infinite;
-        }
-
-        .header-proj:hover .section-icon, .header-proj:hover .section-title { color: var(--col-proj); }
-        .header-proj:hover .section-line { 
-            height: 2px; background: linear-gradient(90deg, var(--col-proj) 0%, #60a5fa 50%, var(--col-proj) 100%);
+        
+        .section-header:hover .section-line { 
+            height: 1.5px;
+            background: linear-gradient(90deg, var(--theme-col) 0%, #ffffff 50%, var(--theme-col) 100%);
             background-size: 200% auto; animation: shimmer-smooth 1.5s linear infinite;
         }
 
         @keyframes shimmer-smooth { to { background-position: 200% center; } }
 
         /* --- Unified Card Styles --- */
-        .card-stack { display: flex; flex-direction: column; gap: 12px; /* Tighter gap */ }
+        .card-stack { display: flex; flex-direction: column; gap: 12px; }
         
         .card, .mini-card {
             background: var(--glass-bg); backdrop-filter: blur(10px);
             border: 1px solid var(--glass-border); border-radius: var(--radius-lg);
-            /* [CHANGED] Reduced Padding */
             padding: 20px 24px; 
             box-shadow: var(--card-shadow);
             transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
             opacity: 0; animation: slideUp 0.8s ease-out forwards 0.3s;
         }
 
+        /* [UPDATED] Card Hover Interaction: Uses Theme Color */
         .card:hover, .mini-card:hover {
-            border-color: var(--primary); 
-            transform: translateY(-6px) !important; 
+            border-color: var(--theme-col); 
+            transform: translateY(-8px) !important; 
             box-shadow: var(--hover-shadow);
         }
 
-        .card:hover .pub-title, .card:hover .exp-org, .mini-card:hover .mini-title { color: var(--primary); transition: color 0.3s; }
-        .mini-card:hover .mini-title i { color: var(--primary); transition: color 0.3s; }
+        /* [UPDATED] Text Highlight Color */
+        .card:hover .pub-title, 
+        .card:hover .exp-org, 
+        .mini-card:hover .mini-title { 
+            color: var(--theme-col); 
+            transition: color 0.3s; 
+        }
+        
+        /* [UPDATED] Icon Highlight Color */
+        .mini-card:hover .mini-title i { 
+            color: var(--theme-col); 
+            transition: color 0.3s; 
+        }
 
         /* --- Publications --- */
         .pub-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
@@ -297,10 +292,11 @@
         .pub-title { font-size: 1.25rem; font-weight: 700; line-height: 1.3; margin-bottom: 8px; color: var(--text-main); letter-spacing: -0.01em; }
         .pub-authors { font-size: 0.95rem; color: var(--text-sub); }
         
+        /* [UPDATED] Name Underline Color */
         .me { color: var(--text-main); font-weight: 700; position: relative; text-decoration: none; display: inline-block; }
         .me::after {
             content: ''; position: absolute; width: 0; height: 2px;
-            bottom: -2px; left: 0; background-color: var(--primary);
+            bottom: -2px; left: 0; background-color: var(--theme-col);
             transition: width 0.4s ease;
         }
         .card:hover .me::after { width: 100%; }
@@ -421,7 +417,7 @@
             </div>
         </header>
 
-        <section class="main-section">
+        <section class="main-section section-pub">
             <div class="section-header header-pub">
                 <div class="section-title-wrapper">
                     <i class="fas fa-book-open section-icon"></i>
@@ -469,7 +465,7 @@
             </div>
         </section>
 
-        <section class="main-section">
+        <section class="main-section section-exp">
             <div class="section-header header-exp">
                 <div class="section-title-wrapper">
                     <i class="fas fa-briefcase section-icon"></i>
@@ -505,7 +501,7 @@
             </div>
         </section>
 
-        <section class="main-section">
+        <section class="main-section section-edu">
             <div class="section-header header-edu">
                 <div class="section-title-wrapper">
                     <i class="fas fa-graduation-cap section-icon"></i>
@@ -540,7 +536,7 @@
             </div>
         </section>
 
-        <section class="main-section">
+        <section class="main-section section-honor">
             <div class="section-header header-honor">
                 <div class="section-title-wrapper">
                     <i class="fas fa-award section-icon"></i>
@@ -616,7 +612,7 @@
             </div>
         </section>
 
-        <section class="main-section">
+        <section class="main-section section-proj">
             <div class="section-header header-proj">
                 <div class="section-title-wrapper">
                     <i class="fas fa-code section-icon"></i>
